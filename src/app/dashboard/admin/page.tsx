@@ -353,16 +353,16 @@ export default function AdminHubPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 z-40 px-4 md:px-8 py-3.5 sm:py-5 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
-          <div className="pl-12 md:pl-0">
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
+          <div className="pl-11 md:pl-0 min-w-0">
+            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
               ADMINISTRATION PORTAL
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
-              System Overview <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Command Center
+            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
+              System Overview <span className="text-[#cbd5e1] mx-1">/</span> Command Center
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginLeft: "auto" }}>
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 ml-auto">
             <button
               onClick={async () => {
                 localStorage.removeItem("merkanto_role");
@@ -373,97 +373,63 @@ export default function AdminHubPage() {
                 } catch {}
                 router.push("/");
               }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                backgroundColor: "#eff6ff",
-                border: "1px solid #bfdbfe",
-                color: "#2563eb",
-                padding: "7px 12px",
-                borderRadius: "10px",
-                fontSize: "12px",
-                fontWeight: 700,
-                cursor: "pointer",
-                fontFamily: "Outfit, sans-serif",
-                transition: "all 0.2s ease"
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.backgroundColor = "#2563eb";
-                e.currentTarget.style.color = "#ffffff";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.backgroundColor = "#eff6ff";
-                e.currentTarget.style.color = "#2563eb";
-              }}
-              title="Return to Main Website (Requires password to re-enter)"
+              className="flex items-center gap-1.5 bg-[#eff6ff] hover:bg-[#2563eb] text-[#2563eb] hover:text-white border border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
+              title="Return to Main Website"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_back</span>
+              <span className="material-symbols-outlined text-[15px]">arrow_back</span>
               <span className="hidden sm:inline">Main Website</span>
             </button>
 
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              backgroundColor: "#ffffff",
-              border: "1px solid #e2e8f0",
-              padding: "6px 12px",
-              borderRadius: "12px",
-              cursor: "pointer",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
-            }}>
-              <div style={{ width: "26px", height: "26px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px" }}>
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-white border border-[#e2e8f0] px-2 sm:px-3 py-1.5 rounded-xl shadow-xs">
+              <div className="w-6 h-6 rounded-full bg-[#2563eb] text-white font-extrabold flex items-center justify-center text-[10px]">
                 E
               </div>
               <span className="hidden md:inline text-[13px] font-semibold text-[#0f172a]">Executive Director</span>
-              <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#64748b" }}>
+              <span className="material-symbols-outlined text-[16px] text-[#64748b]">
                 expand_more
               </span>
             </div>
           </div>
         </header>
 
-        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 md:gap-7 max-w-[1400px] mx-auto">
-          {/* Top 4 Stat Cards */}
+        <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-7 max-w-[1400px] mx-auto">
+          {/* Top Stat Cards — Mobile 2-Column Grid */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
               {/* Card 1: Active Modules */}
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>inventory_2</span>
+              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">inventory_2</span>
                     </div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>ACTIVE MODULES</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">ACTIVE MODULES</span>
                   </div>
-                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{totalCourses}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
-                    <span>active modules</span>
-                    <div style={{ width: "50px", height: "4px", backgroundColor: "#e2e8f0", borderRadius: "2px" }} />
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{totalCourses}</div>
+                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
+                    <span className="truncate">active modules</span>
+                    <div className="hidden sm:block w-8 h-1 bg-[#e2e8f0] rounded" />
                   </div>
                 </div>
               </div>
 
               {/* Card 2: Registered Students */}
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>group</span>
+              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">group</span>
                     </div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>REGISTERED STUDENTS</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">STUDENTS</span>
                   </div>
-                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{enrolledStudents}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
-                    <span>registered students</span>
-                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{enrolledStudents}</div>
+                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
+                    <span className="truncate">registered scholars</span>
+                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
                       <path d="M2 14 Q 12 16, 22 8 T 43 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
@@ -471,75 +437,72 @@ export default function AdminHubPage() {
               </div>
 
               {/* Card 3: Lessons Watched */}
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>play_circle</span>
+              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">play_circle</span>
                     </div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>LESSONS WATCHED</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">WATCHED</span>
                   </div>
-                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{totalWatchedVideos}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
-                    <span>video completions</span>
-                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{totalWatchedVideos}</div>
+                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
+                    <span className="truncate">completions</span>
+                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
                       <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.4" />
                       <rect x="9" y="6" width="4" height="12" rx="1" fill="#2563eb" opacity="0.6" />
                       <rect x="16" y="12" width="4" height="6" rx="1" fill="#2563eb" opacity="0.5" />
                       <rect x="23" y="4" width="4" height="14" rx="1" fill="#2563eb" opacity="0.8" />
-                      <rect x="30" y="2" width="4" height="16" rx="1" fill="#2563eb" />
-                      <rect x="37" y="8" width="4" height="10" rx="1" fill="#2563eb" opacity="0.7" />
+                      <rect x="30" y="2" width="4" height="16" fill="#2563eb" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 4: Average Progress */}
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>trending_up</span>
+              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">trending_up</span>
                     </div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>AVERAGE PROGRESS</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">PROGRESS</span>
                   </div>
-                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{avgProgress}%</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
-                    <span>per scholar avg</span>
-                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{avgProgress}%</div>
+                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
+                    <span className="truncate">avg scholar</span>
+                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
                       <path d="M2 15 C 15 15, 25 8, 43 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                 </div>
               </div>
 
-              {/* Card 5: Demo Access Inquiries */}
+              {/* Card 5: Demo Access Inquiries (Spans full width on mobile, 1 col on desktop) */}
               <div
                 onClick={() => router.push("/dashboard/admin/demo-requests")}
-                style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)", cursor: "pointer", transition: "transform 0.15s ease", position: "relative" }}
+                className="col-span-2 lg:col-span-1 bg-white border border-[#e2e8f0] hover:border-blue-400 rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs cursor-pointer transition-all"
               >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>play_circle</span>
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">play_circle</span>
                     </div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>DEMO INQUIRIES</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">DEMO INQUIRIES</span>
                   </div>
                   {pendingDemoCount > 0 && (
-                    <span style={{ backgroundColor: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", fontSize: "10px", fontWeight: 800, padding: "2px 8px", borderRadius: "9999px" }}>
+                    <span className="bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe] text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0">
                       {pendingDemoCount} PENDING
                     </span>
                   )}
                 </div>
-                <div>
-                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{demoRequests.length}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#2563eb", marginTop: "12px", fontWeight: 600 }}>
+                <div className="flex items-center justify-between lg:block">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-0 lg:mb-1">{demoRequests.length}</div>
+                  <div className="text-[11px] text-[#2563eb] font-semibold flex items-center gap-1">
                     <span>Manage Demo Access →</span>
                   </div>
                 </div>
@@ -617,7 +580,15 @@ export default function AdminHubPage() {
                     <div key={mod.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                       <div>
                         <div style={{ height: "140px", borderRadius: "10px", overflow: "hidden", marginBottom: "12px", backgroundColor: "#e2e8f0" }}>
-                          <img src={mod.img || "/images/brochure_page24_img1.jpeg"} alt={mod.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          <img
+                            src={mod.img || "/images/brochure_page24_img1.jpeg"}
+                            alt={mod.title}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "/images/brochure_page24_img1.jpeg";
+                            }}
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          />
                         </div>
                         <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", margin: 0 }}>{mod.title}</h4>
                         <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", display: "flex", alignItems: "center", gap: "6px" }}>

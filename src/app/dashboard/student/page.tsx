@@ -212,10 +212,10 @@ function StudentSidebar({
       {/* Mobile toggle button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-3.5 left-3.5 z-50 p-2 bg-white border border-[#e2e8f0] rounded-xl text-[#475569] shadow-md flex items-center justify-center hover:bg-slate-50 transition-colors"
+        className="md:hidden fixed top-2.5 left-2.5 z-50 w-9 h-9 bg-white border border-[#e2e8f0] rounded-xl text-[#475569] shadow-sm flex items-center justify-center hover:bg-slate-50 transition-colors"
         aria-label="Open student navigation menu"
       >
-        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>menu</span>
+        <span className="material-symbols-outlined text-[20px]">menu</span>
       </button>
 
       {/* Mobile Drawer */}
@@ -436,17 +436,15 @@ export default function StudentDashboardPage() {
       <div style={{ flex: 1, height: "100vh", overflowY: "auto", backgroundColor: "#f8fafc" }} className="custom-scrollbar">
 
         {/* ── Top Header ── */}
-        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e2e8f0] px-4 md:px-8">
-          <div className="flex items-center justify-between h-16 pl-12 md:pl-0">
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e2e8f0] px-3 sm:px-6 md:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 pl-11 md:pl-0">
             {/* Left: Title */}
-            <div>
-              <h1 style={{ fontSize: "17px", fontWeight: 900, color: "#0f172a", margin: 0, letterSpacing: "0.02em" }}>
+            <div className="min-w-0">
+              <h1 className="text-sm sm:text-base md:text-lg font-black text-[#0f172a] m-0 tracking-tight truncate">
                 ACADEMY DASHBOARD
               </h1>
-              <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 500, marginTop: "2px" }}>
-                Student Portal&nbsp;
-                <span style={{ color: "#cbd5e1" }}>/</span>
-                &nbsp;Learning Center
+              <div className="text-[10px] sm:text-xs text-[#94a3b8] font-medium mt-0.5 truncate">
+                Student Portal <span className="text-[#cbd5e1] mx-1">/</span> Learning Center
               </div>
             </div>
 
@@ -623,11 +621,7 @@ export default function StudentDashboardPage() {
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5">
 
                 {/* Left: Resume Watching */}
-                <div style={{
-                  backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px",
-                  padding: "24px", display: "flex", flexDirection: "column", gap: "16px",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.04)"
-                }}>
+                <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 flex flex-col gap-3.5 sm:gap-4 shadow-xs">
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <div style={{
                       width: "28px", height: "28px", borderRadius: "50%", backgroundColor: "#2563eb",
@@ -640,7 +634,7 @@ export default function StudentDashboardPage() {
                     </span>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-5 flex-1">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 flex-1">
                     <div style={{ flex: 1 }}>
                       {lastWatchedCourse && (
                         <div style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
@@ -649,10 +643,10 @@ export default function StudentDashboardPage() {
                       )}
                       {lastWatchedSession ? (
                         <>
-                          <h2 style={{ fontSize: "19px", fontWeight: 800, color: "#0f172a", margin: "0 0 6px", lineHeight: 1.3 }}>
+                          <h2 style={{ fontSize: "17px", fontWeight: 800, color: "#0f172a", margin: "0 0 6px", lineHeight: 1.3 }}>
                             {lastWatchedSession.title}
                           </h2>
-                          <p style={{ fontSize: "13px", color: "#64748b", lineHeight: 1.5, margin: "0 0 20px" }}>
+                          <p style={{ fontSize: "12.5px", color: "#64748b", lineHeight: 1.5, margin: "0 0 16px" }}>
                             {lastWatchedSession.description || "Pick up where you left off."}
                           </p>
                         </>
@@ -664,7 +658,7 @@ export default function StudentDashboardPage() {
                       {lastWatchedSession && (
                         <button onClick={() => playVideo(lastWatchedSession!)} style={{
                           backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, fontSize: "12px",
-                          border: "none", borderRadius: "10px", padding: "12px 22px", cursor: "pointer",
+                          border: "none", borderRadius: "10px", padding: "10px 20px", cursor: "pointer",
                           display: "inline-flex", alignItems: "center", gap: "8px",
                           boxShadow: "0 4px 16px rgba(37,99,235,0.3)", letterSpacing: "0.05em", textTransform: "uppercase"
                         }}>
@@ -674,33 +668,28 @@ export default function StudentDashboardPage() {
                       )}
                     </div>
                     {/* Course Thumbnail */}
-                    {lastWatchedCourse?.img && (
-                      <div style={{
-                        width: "160px", height: "130px", borderRadius: "12px", overflow: "hidden", flexShrink: 0,
-                        backgroundColor: "#e2e8f0"
-                      }}>
-                        <img src={lastWatchedCourse.img} alt={lastWatchedCourse.title}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                      </div>
-                    )}
-                    {!lastWatchedCourse?.img && (
-                      <div style={{
-                        width: "160px", height: "130px", borderRadius: "12px", overflow: "hidden", flexShrink: 0,
-                        background: "linear-gradient(135deg, #1e3a5f 0%, #2563eb 60%, #0ea5e9 100%)",
-                        display: "flex", alignItems: "center", justifyContent: "center"
-                      }}>
-                        <span className="material-symbols-outlined" style={{ fontSize: "40px", color: "rgba(255,255,255,0.4)" }}>play_circle</span>
-                      </div>
-                    )}
+                    <div className="w-full sm:w-44 h-36 sm:h-auto rounded-xl overflow-hidden shrink-0 bg-slate-100 relative">
+                      {lastWatchedCourse?.img ? (
+                        <img
+                          src={lastWatchedCourse.img}
+                          alt={lastWatchedCourse.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/brochure_page24_img1.jpeg";
+                          }}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full min-h-[120px] bg-gradient-to-br from-[#1e3a5f] via-[#2563eb] to-[#0ea5e9] flex items-center justify-center">
+                          <span className="material-symbols-outlined text-4xl text-white/50">play_circle</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 {/* Right: Newest Course Module */}
-                <div style={{
-                  backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px",
-                  padding: "24px", display: "flex", flexDirection: "column", gap: "12px",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.04)"
-                }}>
+                <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 flex flex-col gap-3 shadow-xs">
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>menu_book</span>
                     <span style={{ fontSize: "10px", fontWeight: 700, color: "#64748b", letterSpacing: "0.12em", textTransform: "uppercase" }}>
@@ -709,17 +698,17 @@ export default function StudentDashboardPage() {
                   </div>
                   {newestCourse ? (
                     <>
-                      <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f172a", margin: 0, lineHeight: 1.35 }}>
+                      <h3 style={{ fontSize: "15px", fontWeight: 800, color: "#0f172a", margin: 0, lineHeight: 1.35 }}>
                         {newestCourse.title}
                       </h3>
-                      <p style={{ fontSize: "12.5px", color: "#64748b", lineHeight: 1.55, margin: 0, flex: 1 }}>
+                      <p style={{ fontSize: "12px", color: "#64748b", lineHeight: 1.5, margin: 0, flex: 1 }}>
                         {newestCourse.description
                           ? newestCourse.description.slice(0, 140) + (newestCourse.description.length > 140 ? "..." : "")
                           : "Explore our newest curriculum module and trade resources."}
                       </p>
                       <button onClick={() => setSelectedCourseDetail(newestCourse)} style={{
                         backgroundColor: "#ffffff", color: "#2563eb", border: "1.5px solid #2563eb",
-                        fontWeight: 700, fontSize: "11px", borderRadius: "10px", padding: "11px 18px",
+                        fontWeight: 700, fontSize: "11px", borderRadius: "10px", padding: "10px 16px",
                         cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "8px",
                         letterSpacing: "0.05em", textTransform: "uppercase", marginTop: "auto"
                       }}>
@@ -858,6 +847,10 @@ export default function StudentDashboardPage() {
                         <img
                           src={course.img || "/images/brochure_page24_img1.jpeg"}
                           alt={course.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/brochure_page24_img1.jpeg";
+                          }}
                           style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         />
                         {/* Lessons badge */}

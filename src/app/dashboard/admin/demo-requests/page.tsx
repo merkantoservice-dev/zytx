@@ -168,13 +168,13 @@ export default function AdminDemoRequestsPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 z-40 px-4 md:px-8 py-3.5 sm:py-5 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
-          <div className="pl-12 md:pl-0">
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
+          <div className="pl-11 md:pl-0 min-w-0">
+            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
               DEMO ACCESS & MEDIA CONTROL
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
-              Student Access Management <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Course Demo Stream Setup
+            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
+              Student Access Management <span className="text-[#cbd5e1] mx-1">/</span> Course Demo Stream Setup
             </div>
           </div>
 
