@@ -25,30 +25,7 @@
 }
 .logo {
   display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.logoText {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--brand-blue);
-  letter-spacing: -1px;
-  line-height: 1;
-}
-.logoX {
-  position: absolute;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--brand-blue);
-  right: -18px;
-  top: 0;
-  line-height: 1;
-}
-.logoArrow {
-  position: absolute;
-  top: -3px;
-  right: -5px;
-  color: white;
+  align-items: center;
 }
 
 .loginCardWrapper {

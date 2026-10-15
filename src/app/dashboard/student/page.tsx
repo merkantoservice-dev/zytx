@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCourses, Course, Session } from "@/hooks/useCourses";
@@ -74,22 +75,21 @@ function StudentSidebar({
       flexDirection: "column", flexShrink: 0, overflowY: "auto"
     }}>
       {/* Logo */}
-      <div style={{ padding: "28px 24px 20px" }}>
+      <div style={{ padding: "24px 20px 18px" }}>
         <button
           onClick={handleExitToWebsite}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left", display: "flex", flexDirection: "column", gap: "6px" }}
           title="Return to Main Website (Requires password to re-enter)"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <span style={{ fontSize: "22px", fontWeight: 900, color: "#0f172a", fontFamily: "Outfit, sans-serif", lineHeight: 1 }}>ZYT</span>
-            <span style={{ fontSize: "22px", fontWeight: 900, color: "#2563eb", fontFamily: "Outfit, sans-serif", lineHeight: 1, position: "relative" }}>
-              X
-              <svg style={{ position: "absolute", top: "-1px", right: "-7px" }} width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="19" x2="19" y2="5" /><polyline points="5 5 19 5 19 19" />
-              </svg>
-            </span>
-          </div>
-          <div style={{ fontSize: "9px", fontWeight: 700, color: "#94a3b8", letterSpacing: "0.18em", textTransform: "uppercase", marginTop: "4px" }}>ACADEMY</div>
+          <Image
+            src="/logo.png"
+            alt="ZYT X - Driven by Growth"
+            width={105}
+            height={54}
+            style={{ height: "34px", width: "auto", display: "block" }}
+            priority
+          />
+          <div style={{ fontSize: "9px", fontWeight: 700, color: "#94a3b8", letterSpacing: "0.18em", textTransform: "uppercase" }}>ACADEMY</div>
         </button>
       </div>
 

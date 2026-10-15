@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
@@ -119,15 +120,15 @@ export default function LoginPage() {
       </div>
 
       <div className={styles.logoMark}>
-        <Link href="/" className={styles.logo} style={{ textDecoration: "none" }}>
-          <span className={styles.logoText}>ZYT</span>
-          <span className={styles.logoX}>
-            X
-            <svg className={styles.logoArrow} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="19" x2="19" y2="5"></line>
-              <polyline points="5 5 19 5 19 19"></polyline>
-            </svg>
-          </span>
+        <Link href="/" style={{ textDecoration: "none", display: "inline-block" }}>
+          <Image
+            src="/logo-white.png"
+            alt="ZYT X - Driven by Growth"
+            width={140}
+            height={72}
+            style={{ height: "52px", width: "auto", display: "block" }}
+            priority
+          />
         </Link>
       </div>
 

@@ -18,44 +18,8 @@
 
 .logo {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  width: max-content;
-}
-
-.logoText {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--navy);
-  letter-spacing: -1px;
-  line-height: 1;
-}
-
-.logoX {
-  position: absolute;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--navy);
-  right: -30px;
-  top: 0;
-  line-height: 1;
-}
-
-.logoArrow {
-  position: absolute;
-  top: -5px;
-  right: -8px;
-  color: var(--brand-blue);
-  width: 20px;
-  height: 20px;
-}
-
-.logoSub {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--text-light);
-  margin-top: 6px;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .copyright {

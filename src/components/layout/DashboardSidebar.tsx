@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,26 +59,24 @@ export default function DashboardSidebar({
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-white text-[#0f172a]">
       {/* Brand Header */}
-      <div style={{ padding: "28px 24px 24px" }}>
+      <div style={{ padding: "24px 20px 20px" }}>
         <button
           onClick={handleExitToWebsite}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left", display: "flex", flexDirection: "column", gap: "6px" }}
           title="Return to Main Website (Requires re-login to return)"
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <span style={{ fontSize: "24px", fontWeight: 900, color: "#0f172a", letterSpacing: "-0.5px", fontFamily: "Outfit, sans-serif", lineHeight: 1 }}>ZYT</span>
-            <span style={{ fontSize: "24px", fontWeight: 900, color: "#2563eb", fontFamily: "Outfit, sans-serif", lineHeight: 1, position: "relative" }}>
-              X
-              <svg style={{ position: "absolute", top: "-2px", right: "-8px" }} width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="19" x2="19" y2="5" />
-                <polyline points="5 5 19 5 19 19" />
-              </svg>
-            </span>
+          <Image
+            src="/logo.png"
+            alt="ZYT X - Driven by Growth"
+            width={110}
+            height={57}
+            style={{ height: "38px", width: "auto", display: "block" }}
+            priority
+          />
+          <div style={{ fontFamily: "Outfit, sans-serif", fontSize: "10px", fontWeight: 700, color: "#64748b", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            {brandLabel}
           </div>
         </button>
-        <div style={{ fontFamily: "Outfit, sans-serif", fontSize: "10px", fontWeight: 700, color: "#64748b", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "6px" }}>
-          {brandLabel}
-        </div>
       </div>
 
       {/* Nav links */}

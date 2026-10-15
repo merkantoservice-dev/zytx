@@ -15,41 +15,12 @@
 
 .logo {
   display: flex;
-  flex-direction: column;
-  position: relative;
+  align-items: center;
+  transition: opacity 0.2s ease;
 }
 
-.logoText {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--navy);
-  letter-spacing: -1px;
-  line-height: 1;
-}
-
-.logoX {
-  position: absolute;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--navy);
-  right: -24px;
-  top: 0;
-  line-height: 1;
-}
-
-.logoArrow {
-  position: absolute;
-  top: -4px;
-  right: -6px;
-  color: var(--brand-blue);
-}
-
-.logoSub {
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--text-light);
-  margin-top: 4px;
+.logo:hover {
+  opacity: 0.9;
 }
 
 .navLinks {
