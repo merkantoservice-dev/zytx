@@ -247,9 +247,10 @@ export default function StudentDashboardPage() {
 
   // Resolve logged-in student
   const userEmail = typeof window !== "undefined" ? localStorage.getItem("merkanto_user") : null;
+  const userName = typeof window !== "undefined" ? localStorage.getItem("merkanto_user_name") : null;
   const currentStudent = students.find(s => s.email === userEmail) || {
     id: "s_demo",
-    name: localStorage?.getItem?.("merkanto_user_name") || "Student",
+    name: userName || "Student",
     email: userEmail || "student@zytx.com",
     track: "Executive Track",
     progress: 0,
