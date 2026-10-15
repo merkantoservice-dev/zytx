@@ -617,15 +617,7 @@ export default function CourseDemoSection() {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.25 }}
-                style={{
-                  width: "100%",
-                  maxWidth: "1050px",
-                  backgroundColor: "#ffffff",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "8px",
-                  padding: "24px",
-                  boxShadow: "0 20px 45px rgba(15, 23, 42, 0.08)"
-                }}
+                className="w-full max-w-[1050px] bg-white border border-[#e2e8f0] rounded-xl p-3 sm:p-6 shadow-xl"
               >
                 {/* Header Bar */}
                 <div
@@ -674,20 +666,22 @@ export default function CourseDemoSection() {
                     style={{
                       display: "flex",
                       alignItems: "center",
+                      flexWrap: "wrap",
                       gap: "6px",
                       backgroundColor: "#f1f5f9",
                       padding: "4px",
                       border: "1px solid #e2e8f0",
-                      borderRadius: "6px"
+                      borderRadius: "6px",
+                      maxWidth: "100%"
                     }}
                   >
                     <button
                       onClick={() => setActiveVidIdx(0)}
                       style={{
-                        padding: "8px 14px",
+                        padding: "8px 12px",
                         fontSize: "10px",
                         textTransform: "uppercase",
-                        letterSpacing: "0.1em",
+                        letterSpacing: "0.08em",
                         fontWeight: 800,
                         borderRadius: "4px",
                         border: "none",
@@ -696,7 +690,8 @@ export default function CourseDemoSection() {
                         color: activeVidIdx === 0 ? "#ffffff" : "#64748b",
                         boxShadow: activeVidIdx === 0 ? "0 2px 8px rgba(37,99,235,0.3)" : "none",
                         fontFamily: "Geist Mono, monospace",
-                        transition: "all 0.15s ease"
+                        transition: "all 0.15s ease",
+                        textAlign: "left"
                       }}
                     >
                       {demoConfig.v1.title}
@@ -704,10 +699,10 @@ export default function CourseDemoSection() {
                     <button
                       onClick={() => setActiveVidIdx(1)}
                       style={{
-                        padding: "8px 14px",
+                        padding: "8px 12px",
                         fontSize: "10px",
                         textTransform: "uppercase",
-                        letterSpacing: "0.1em",
+                        letterSpacing: "0.08em",
                         fontWeight: 800,
                         borderRadius: "4px",
                         border: "none",
@@ -716,7 +711,8 @@ export default function CourseDemoSection() {
                         color: activeVidIdx === 1 ? "#ffffff" : "#64748b",
                         boxShadow: activeVidIdx === 1 ? "0 2px 8px rgba(37,99,235,0.3)" : "none",
                         fontFamily: "Geist Mono, monospace",
-                        transition: "all 0.15s ease"
+                        transition: "all 0.15s ease",
+                        textAlign: "left"
                       }}
                     >
                       {demoConfig.v2.title}

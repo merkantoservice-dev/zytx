@@ -20,7 +20,7 @@ export default function ContactPage() {
         </p>
       </div>
       
-      <section style={{ padding: '8rem 4rem' }}>
+      <section className="px-5 py-12 md:px-16 md:py-24">
         <div className={styles.grid2}>
           
           <div>

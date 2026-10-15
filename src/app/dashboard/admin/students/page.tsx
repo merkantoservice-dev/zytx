@@ -144,19 +144,8 @@ export default function StudentManagementPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          padding: "20px 32px",
-          borderBottom: "1px solid #e2e8f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-        }}>
-          <div>
+        <header className="sticky top-0 z-40 px-4 md:px-8 py-3.5 sm:py-5 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
+          <div className="pl-12 md:pl-0">
             <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               STUDENTS REGISTRY
             </h1>
@@ -170,7 +159,7 @@ export default function StudentManagementPage() {
               backgroundColor: "#2563eb",
               color: "#ffffff",
               fontWeight: 700,
-              padding: "10px 20px",
+              padding: "9px 16px",
               borderRadius: "8px",
               border: "none",
               fontSize: "12px",
@@ -182,11 +171,11 @@ export default function StudentManagementPage() {
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>person_add</span>
-            Enroll Student
+            <span className="hidden sm:inline">Enroll Student</span>
           </button>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 max-w-[1400px] mx-auto">
           {/* Stats Cards */}
           <motion.div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>

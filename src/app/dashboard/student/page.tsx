@@ -48,6 +48,8 @@ function StudentSidebar({
   initials: string;
 }) {
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const handleSignOut = async () => {
     localStorage.removeItem("merkanto_role");
     localStorage.removeItem("merkanto_user");
@@ -68,12 +70,8 @@ function StudentSidebar({
     router.push("/");
   };
 
-  return (
-    <aside style={{
-      width: "220px", minWidth: "220px", height: "100vh", backgroundColor: "#ffffff",
-      borderRight: "1px solid #e2e8f0", position: "sticky", top: 0, display: "flex",
-      flexDirection: "column", flexShrink: 0, overflowY: "auto"
-    }}>
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full bg-white text-[#0f172a]">
       {/* Logo */}
       <div style={{ padding: "24px 20px 18px" }}>
         <button
@@ -100,7 +98,10 @@ function StudentSidebar({
           return (
             <button
               key={link.label}
-              onClick={() => link.tab >= 0 && setActiveTab(link.tab)}
+              onClick={() => {
+                if (link.tab >= 0) setActiveTab(link.tab);
+                setMobileOpen(false);
+              }}
               style={{
                 display: "flex", alignItems: "center", gap: "12px", padding: "11px 14px",
                 borderRadius: "10px", fontSize: "13.5px", fontWeight: isActive ? 700 : 500,
@@ -132,7 +133,10 @@ function StudentSidebar({
           <div style={{ fontSize: "12px", fontWeight: 800, color: "#ffffff", lineHeight: 1.3, marginBottom: "4px" }}>Keep Learning<br />Keep Growing</div>
           <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4, marginBottom: "12px" }}>Complete your courses and earn certificates</div>
           <button
-            onClick={() => setActiveTab(0)}
+            onClick={() => {
+              setActiveTab(0);
+              setMobileOpen(false);
+            }}
             style={{
               backgroundColor: "#ffffff", color: "#2563eb", fontWeight: 700, fontSize: "10px",
               border: "none", borderRadius: "6px", padding: "6px 12px", cursor: "pointer",
@@ -200,7 +204,69 @@ function StudentSidebar({
           Logout
         </button>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile toggle button */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="md:hidden fixed top-3.5 left-3.5 z-50 p-2 bg-white border border-[#e2e8f0] rounded-xl text-[#475569] shadow-md flex items-center justify-center hover:bg-slate-50 transition-colors"
+        aria-label="Open student navigation menu"
+      >
+        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>menu</span>
+      </button>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+            />
+            <motion.aside
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 250 }}
+              className="md:hidden fixed left-0 top-0 h-full z-50 overflow-hidden shadow-2xl"
+              style={{ width: "260px", background: "#ffffff", borderRight: "1px solid #e2e8f0" }}
+            >
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{ position: "absolute", top: "16px", right: "16px", color: "#64748b", background: "none", border: "none", cursor: "pointer", zIndex: 10 }}
+                aria-label="Close navigation"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>close</span>
+              </button>
+              <SidebarContent />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop static sidebar */}
+      <aside
+        className="hidden md:flex flex-col shrink-0"
+        style={{
+          width: "220px",
+          minWidth: "220px",
+          height: "100vh",
+          backgroundColor: "#ffffff",
+          borderRight: "1px solid #e2e8f0",
+          position: "sticky",
+          top: 0,
+          overflowY: "auto"
+        }}
+      >
+        <SidebarContent />
+      </aside>
+    </>
   );
 }
 
@@ -370,12 +436,8 @@ export default function StudentDashboardPage() {
       <div style={{ flex: 1, height: "100vh", overflowY: "auto", backgroundColor: "#f8fafc" }} className="custom-scrollbar">
 
         {/* ── Top Header ── */}
-        <header style={{
-          position: "sticky", top: 0, zIndex: 40,
-          backgroundColor: "rgba(255,255,255,0.97)", backdropFilter: "blur(10px)",
-          borderBottom: "1px solid #e2e8f0", padding: "0 32px"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e2e8f0] px-4 md:px-8">
+          <div className="flex items-center justify-between h-16 pl-12 md:pl-0">
             {/* Left: Title */}
             <div>
               <h1 style={{ fontSize: "17px", fontWeight: 900, color: "#0f172a", margin: 0, letterSpacing: "0.02em" }}>
@@ -389,7 +451,7 @@ export default function StudentDashboardPage() {
             </div>
 
             {/* Center: Search Bar */}
-            <div style={{ flex: 1, maxWidth: "360px", margin: "0 32px", position: "relative" }}>
+            <div className="hidden sm:block flex-1 max-w-[360px] mx-4 md:mx-8 relative">
               <span className="material-symbols-outlined" style={{
                 position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)",
                 fontSize: "17px", color: "#94a3b8", pointerEvents: "none"
@@ -469,7 +531,7 @@ export default function StudentDashboardPage() {
                     <div style={{ fontSize: "13px", fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }}>{currentStudent.name.split(" ")[0]}</div>
                     <div style={{ fontSize: "10px", color: "#94a3b8" }}>Student</div>
                   </div>
-                  <div style={{ textAlign: "left" }}>
+                  <div className="hidden sm:block text-left">
                     <div style={{ fontSize: "13px", fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }}>{currentStudent.name.split(" ")[0]}</div>
                     <div style={{ fontSize: "10px", color: "#94a3b8" }}>Student</div>
                   </div>
@@ -532,7 +594,7 @@ export default function StudentDashboardPage() {
           </div>
 
           {/* Tabs */}
-          <div style={{ display: "flex", gap: "0px", borderTop: "1px solid #f1f5f9" }}>
+          <div style={{ display: "flex", gap: "0px", borderTop: "1px solid #f1f5f9", overflowX: "auto" }}>
             {["My Learning", "Course Library"].map((tab, i) => (
               <button key={tab} onClick={() => setActiveTab(i)} style={{
                 padding: "14px 20px", fontSize: "13px",
@@ -540,7 +602,8 @@ export default function StudentDashboardPage() {
                 color: activeTab === i ? "#2563eb" : "#94a3b8",
                 background: "none", border: "none",
                 borderBottom: activeTab === i ? "2px solid #2563eb" : "2px solid transparent",
-                cursor: "pointer", transition: "all 0.2s ease", fontFamily: "Outfit, sans-serif"
+                cursor: "pointer", transition: "all 0.2s ease", fontFamily: "Outfit, sans-serif",
+                whiteSpace: "nowrap"
               }}>
                 {tab}
               </button>
@@ -549,7 +612,7 @@ export default function StudentDashboardPage() {
         </header>
 
         {/* ── Body ── */}
-        <div style={{ padding: "28px 32px", maxWidth: "1300px", margin: "0 auto" }}>
+        <div className="p-4 sm:p-6 md:p-8 max-w-[1300px] mx-auto">
 
           {/* ══ TAB 0: MY LEARNING ══ */}
           {activeTab === 0 && (
@@ -557,7 +620,7 @@ export default function StudentDashboardPage() {
               style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
 
               {/* Hero Row: Resume Watching + Newest Module */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: "20px" }}>
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5">
 
                 {/* Left: Resume Watching */}
                 <div style={{
@@ -577,7 +640,7 @@ export default function StudentDashboardPage() {
                     </span>
                   </div>
 
-                  <div style={{ display: "flex", gap: "20px", flex: 1 }}>
+                  <div className="flex flex-col sm:flex-row gap-5 flex-1">
                     <div style={{ flex: 1 }}>
                       {lastWatchedCourse && (
                         <div style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
@@ -731,12 +794,9 @@ export default function StudentDashboardPage() {
                     {studentAssignments.map((assign) => {
                       const studentSubmission = assign.submissions?.find(sub => sub.studentId === currentStudent.id);
                       return (
-                        <div key={assign.id} style={{
-                          padding: "16px 20px", backgroundColor: "#f8fafc", border: "1px solid #e2e8f0",
-                          borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px"
-                        }}>
+                        <div key={assign.id} className="p-4 sm:p-5 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                           <div style={{ flex: 1 }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px", flexWrap: "wrap" }}>
                               <span style={{ fontSize: "11px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase" }}>Due: {assign.dueDate}</span>
                               {studentSubmission?.status === "Graded" ? (
                                 <span style={{ backgroundColor: "#dcfce7", color: "#16a34a", borderRadius: "9999px", padding: "2px 8px", fontSize: "10px", fontWeight: 700 }}>✓ Graded: {studentSubmission.grade}</span>
@@ -749,7 +809,7 @@ export default function StudentDashboardPage() {
                             <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", margin: "0 0 3px" }}>{assign.title}</h3>
                             <p style={{ fontSize: "12px", color: "#64748b", margin: 0 }}>{assign.description}</p>
                           </div>
-                          <div>
+                          <div className="shrink-0">
                             {studentSubmission ? (
                               <button disabled style={{ backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0", color: "#94a3b8", padding: "8px 16px", borderRadius: "8px", fontSize: "11px", fontWeight: 700, cursor: "not-allowed" }}>Completed</button>
                             ) : (
@@ -908,10 +968,7 @@ export default function StudentDashboardPage() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 150, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(15,23,42,0.55)", backdropFilter: "blur(6px)", overflowY: "auto" }}>
             <motion.div initial={{ scale: 0.96, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.96, y: 20 }}
-              style={{
-                backgroundColor: "#ffffff", borderRadius: "20px", width: "100%", maxWidth: "820px",
-                display: "flex", overflow: "hidden", boxShadow: "0 30px 60px rgba(0,0,0,0.22)", position: "relative"
-              }}>
+              className="bg-white rounded-2xl w-full max-w-[820px] flex flex-col md:flex-row overflow-hidden shadow-2xl relative max-h-[90vh]">
 
               {/* Close */}
               <button onClick={() => setSelectedCourseDetail(null)} style={{
@@ -924,7 +981,7 @@ export default function StudentDashboardPage() {
               </button>
 
               {/* Left: Image + Description */}
-              <div style={{ width: "300px", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+              <div className="w-full md:w-[300px] shrink-0 flex flex-col">
                 <div style={{ padding: "28px 24px 20px" }}>
                   <div style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "8px" }}>
                     COURSE MODULES
@@ -936,7 +993,7 @@ export default function StudentDashboardPage() {
                     {selectedCourseDetail.description || "Explore all the video lessons inside this course module."}
                   </p>
                 </div>
-                <div style={{ flex: 1, overflow: "hidden", minHeight: "200px", position: "relative", margin: "0 0 0 0" }}>
+                <div className="flex-1 overflow-hidden min-h-[160px] md:min-h-[200px] relative">
                   <img
                     src={selectedCourseDetail.img || "/images/brochure_page24_img1.jpeg"}
                     alt={selectedCourseDetail.title}
@@ -946,7 +1003,7 @@ export default function StudentDashboardPage() {
               </div>
 
               {/* Right: Lesson List */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", borderLeft: "1px solid #f1f5f9" }}>
+              <div className="flex-1 flex flex-col border-t md:border-t-0 md:border-l border-[#f1f5f9] min-h-0 overflow-hidden">
                 <div style={{ padding: "24px 24px 16px", borderBottom: "1px solid #f1f5f9" }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -1063,13 +1120,9 @@ export default function StudentDashboardPage() {
         {playingUrl && activeSession && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 180, display: "flex", alignItems: "center", justifyContent: "center", padding: "12px", backgroundColor: "rgba(15,23,42,0.6)", backdropFilter: "blur(6px)" }}>
-            <div style={{
-              position: "relative", width: "100%", maxWidth: "1200px", height: "88vh",
-              backgroundColor: "#f8fafc", borderRadius: "18px", display: "flex",
-              flexDirection: "row", overflow: "hidden", boxShadow: "0 32px 64px rgba(0,0,0,0.3)"
-            }}>
+            <div className="relative w-full max-w-[1200px] h-[92vh] md:h-[88vh] bg-[#f8fafc] rounded-2xl flex flex-col lg:flex-row overflow-hidden shadow-2xl">
               {/* Left: Video Area */}
-              <div style={{ flex: 1, backgroundColor: "#ffffff", display: "flex", flexDirection: "column" }}>
+              <div className="flex-1 bg-white flex flex-col min-h-0 overflow-y-auto">
                 {/* Breadcrumb header */}
                 <div style={{ padding: "14px 20px", borderBottom: "1px solid #e2e8f0", backgroundColor: "#ffffff" }}>
                   <div style={{ fontSize: "11px", color: "#94a3b8", marginBottom: "4px" }}>
@@ -1082,39 +1135,39 @@ export default function StudentDashboardPage() {
                 </div>
 
                 {/* Course info strip */}
-                <div style={{ padding: "14px 20px", borderBottom: "1px solid #e2e8f0", backgroundColor: "#ffffff", display: "flex", alignItems: "center", gap: "14px" }}>
+                <div className="p-3 sm:p-4 border-b border-[#e2e8f0] bg-white flex items-center gap-3 sm:gap-4 flex-wrap sm:flex-nowrap">
                   {lastWatchedCourse?.img && (
-                    <div style={{ width: "48px", height: "48px", borderRadius: "8px", overflow: "hidden", flexShrink: 0, backgroundColor: "#e2e8f0" }}>
+                    <div style={{ width: "44px", height: "44px", borderRadius: "8px", overflow: "hidden", flexShrink: 0, backgroundColor: "#e2e8f0" }}>
                       <img src={lastWatchedCourse.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                   )}
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: "160px" }}>
                     <div style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.1em" }}>COURSE MODULE</div>
-                    <div style={{ fontSize: "15px", fontWeight: 800, color: "#0f172a", marginTop: "2px" }}>{lastWatchedCourse?.title || "Course"}</div>
-                    <div style={{ fontSize: "11px", color: "#94a3b8" }}>{lastWatchedCourse?.description?.slice(0, 80)}...</div>
+                    <div style={{ fontSize: "14px", fontWeight: 800, color: "#0f172a", marginTop: "2px" }}>{lastWatchedCourse?.title || "Course"}</div>
+                    <div className="hidden sm:block text-[11px] text-[#94a3b8]">{lastWatchedCourse?.description?.slice(0, 80)}...</div>
                   </div>
-                  <div style={{ textAlign: "right" }}>
+                  <div className="text-right ml-auto">
                     <div style={{ fontSize: "11px", color: "#94a3b8" }}>Course Progress</div>
-                    <div style={{ width: "120px", height: "5px", backgroundColor: "#e2e8f0", borderRadius: "9999px", overflow: "hidden", marginTop: "6px" }}>
+                    <div style={{ width: "100px", height: "5px", backgroundColor: "#e2e8f0", borderRadius: "9999px", overflow: "hidden", marginTop: "6px" }}>
                       <div style={{ width: `${dynamicCompletion}%`, height: "100%", backgroundColor: "#2563eb", borderRadius: "9999px" }} />
                     </div>
                     <div style={{ fontSize: "10px", color: "#94a3b8", marginTop: "4px" }}>{watchedSessionsCount}/{totalSessionsCount} lessons</div>
                   </div>
                   <button onClick={() => { setPlayingUrl(null); setActiveSession(null); }}
-                    style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b", cursor: "pointer" }}>
+                    style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b", cursor: "pointer", flexShrink: 0 }}>
                     <span className="material-symbols-outlined" style={{ fontSize: "17px" }}>close</span>
                   </button>
                 </div>
 
                 {/* Active session label */}
-                <div style={{ padding: "10px 20px", backgroundColor: "#f8fafc", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{ padding: "8px 16px", backgroundColor: "#f8fafc", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ width: "8px", height: "8px", backgroundColor: "#22c55e", borderRadius: "50%", flexShrink: 0 }} />
                   <span style={{ fontSize: "10px", fontWeight: 700, color: "#22c55e", letterSpacing: "0.08em" }}>Active Session</span>
                   <span style={{ fontSize: "12px", fontWeight: 600, color: "#64748b" }}>{activeSession.title}</span>
                 </div>
 
                 {/* Video embed */}
-                <div style={{ flex: 1, position: "relative", backgroundColor: "#000" }}>
+                <div className="relative w-full aspect-video lg:aspect-auto lg:flex-1 bg-black min-h-[220px] sm:min-h-[340px]">
                   <iframe
                     src={`${playingUrl}?autoplay=1`}
                     style={{ width: "100%", height: "100%", position: "absolute", inset: 0, border: "none" }}
@@ -1125,14 +1178,14 @@ export default function StudentDashboardPage() {
 
                 {/* Lesson tabs below video */}
                 <div style={{ borderTop: "1px solid #e2e8f0", backgroundColor: "#ffffff" }}>
-                  <div style={{ display: "flex", padding: "0 16px", gap: "4px" }}>
+                  <div style={{ display: "flex", padding: "0 16px", gap: "4px", overflowX: "auto" }}>
                     {["Lesson List", "Overview", "Resources", "Discussion"].map((t, ti) => (
                       <button key={t} style={{
                         padding: "12px 16px", fontSize: "12px", fontWeight: ti === 0 ? 700 : 500,
                         color: ti === 0 ? "#2563eb" : "#94a3b8",
                         borderBottom: ti === 0 ? "2px solid #2563eb" : "2px solid transparent",
                         background: "none", border: "none", borderTop: "none", borderLeft: "none", borderRight: "none",
-                        cursor: "pointer", fontFamily: "Outfit, sans-serif"
+                        cursor: "pointer", fontFamily: "Outfit, sans-serif", whiteSpace: "nowrap"
                       }}>
                         {t}
                       </button>
@@ -1142,7 +1195,7 @@ export default function StudentDashboardPage() {
               </div>
 
               {/* Right: Notes + Q&A */}
-              <div style={{ width: "340px", borderLeft: "1px solid #e2e8f0", display: "flex", flexDirection: "column", backgroundColor: "#ffffff" }}>
+              <div className="w-full lg:w-[340px] border-t lg:border-t-0 lg:border-l border-[#e2e8f0] flex flex-col bg-white shrink-0 min-h-[300px] lg:min-h-0">
                 {/* Tab Switcher */}
                 <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0" }}>
                   {[

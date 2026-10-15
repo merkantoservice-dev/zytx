@@ -353,19 +353,8 @@ export default function AdminHubPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          padding: "20px 32px",
-          borderBottom: "1px solid #e2e8f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-        }}>
-          <div>
+        <header className="sticky top-0 z-40 px-4 md:px-8 py-3.5 sm:py-5 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
+          <div className="pl-12 md:pl-0">
             <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               ADMINISTRATION PORTAL
             </h1>
@@ -373,7 +362,7 @@ export default function AdminHubPage() {
               System Overview <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Command Center
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginLeft: "auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginLeft: "auto" }}>
             <button
               onClick={async () => {
                 localStorage.removeItem("merkanto_role");
@@ -391,7 +380,7 @@ export default function AdminHubPage() {
                 backgroundColor: "#eff6ff",
                 border: "1px solid #bfdbfe",
                 color: "#2563eb",
-                padding: "7px 14px",
+                padding: "7px 12px",
                 borderRadius: "10px",
                 fontSize: "12px",
                 fontWeight: 700,
@@ -410,24 +399,24 @@ export default function AdminHubPage() {
               title="Return to Main Website (Requires password to re-enter)"
             >
               <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_back</span>
-              Main Website
+              <span className="hidden sm:inline">Main Website</span>
             </button>
 
             <div style={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
+              gap: "8px",
               backgroundColor: "#ffffff",
               border: "1px solid #e2e8f0",
-              padding: "6px 14px",
+              padding: "6px 12px",
               borderRadius: "12px",
               cursor: "pointer",
               boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
             }}>
-              <div style={{ width: "28px", height: "28px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px" }}>
+              <div style={{ width: "26px", height: "26px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px" }}>
                 E
               </div>
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>Executive Director</span>
+              <span className="hidden md:inline text-[13px] font-semibold text-[#0f172a]">Executive Director</span>
               <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#64748b" }}>
                 expand_more
               </span>
@@ -435,7 +424,7 @@ export default function AdminHubPage() {
           </div>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 md:gap-7 max-w-[1400px] mx-auto">
           {/* Top 4 Stat Cards */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
