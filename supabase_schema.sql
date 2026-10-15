@@ -98,9 +98,9 @@ ON CONFLICT (email) DO NOTHING;
 INSERT INTO public.merkanto_content (key, value, category, label, type)
 VALUES
   ('demo.v1.title', 'DEMO VIDEO 1: MASTERCLASS OVERVIEW', 'Demo', 'Demo Video 1 Title', 'text'),
-  ('demo.v1.url', 'https://player.vimeo.com/video/1197817919?h=31d77d474c', 'Demo', 'Demo Video 1 URL', 'video'),
+  ('demo.v1.url', 'https://player.vimeo.com/video/1236241664', 'Demo', 'Demo Video 1 URL', 'video'),
   ('demo.v2.title', 'DEMO VIDEO 2: BASICS OF EXPORTING', 'Demo', 'Demo Video 2 Title', 'text'),
-  ('demo.v2.url', 'https://player.vimeo.com/video/1197817919?h=31d77d474c', 'Demo', 'Demo Video 2 URL', 'video'),
+  ('demo.v2.url', 'https://player.vimeo.com/video/1236241664', 'Demo', 'Demo Video 2 URL', 'video'),
   ('demo.whatsapp', '+91 98765 43210', 'Demo', 'WhatsApp Support Number', 'text')
 ON CONFLICT (key) DO NOTHING;
 

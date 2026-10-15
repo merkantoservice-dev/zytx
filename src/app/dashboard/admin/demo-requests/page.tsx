@@ -23,9 +23,9 @@ export default function AdminDemoRequestsPage() {
   } = useDemo();
 
   const [v1Title, setV1Title] = useState("DEMO VIDEO 1: MASTERCLASS OVERVIEW");
-  const [v1Url, setV1Url] = useState("https://player.vimeo.com/video/1197817919?h=31d77d474c");
+  const [v1Url, setV1Url] = useState("https://player.vimeo.com/video/1236241664");
   const [v2Title, setV2Title] = useState("DEMO VIDEO 2: BASICS OF EXPORTING");
-  const [v2Url, setV2Url] = useState("https://player.vimeo.com/video/1197817919?h=31d77d474c");
+  const [v2Url, setV2Url] = useState("https://player.vimeo.com/video/1236241664");
   const [whatsappNumber, setWhatsappNumber] = useState("+91 98765 43210");
 
   const [filterStatus, setFilterStatus] = useState<"all" | "pending" | "approved" | "rejected" | "paused">("all");
@@ -57,9 +57,9 @@ export default function AdminDemoRequestsPage() {
     const vids = await fetchDemoVideos();
     if (vids) {
       setV1Title(vids.v1?.title || "DEMO VIDEO 1: MASTERCLASS OVERVIEW");
-      setV1Url(vids.v1?.url || "https://player.vimeo.com/video/1197817919?h=31d77d474c");
+      setV1Url(vids.v1?.url || "https://player.vimeo.com/video/1236241664");
       setV2Title(vids.v2?.title || "DEMO VIDEO 2: BASICS OF EXPORTING");
-      setV2Url(vids.v2?.url || "https://player.vimeo.com/video/1197817919?h=31d77d474c");
+      setV2Url(vids.v2?.url || "https://player.vimeo.com/video/1236241664");
       if (vids.whatsapp) setWhatsappNumber(vids.whatsapp);
     }
   };

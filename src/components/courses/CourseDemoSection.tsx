@@ -6,11 +6,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useDemo, DemoConfig } from "@/hooks/useDemo";
 
 const getEmbedUrl = (input: string) => {
+  if (!input) return "https://player.vimeo.com/video/1236241664";
   try {
-    let urlStr = input;
-    const srcMatch = input.match(/src="([^"]+)"/);
+    let urlStr = input.trim();
+    // If base64/JSON token was accidentally pasted:
+    if (urlStr.startsWith("ey") && urlStr.length > 50) {
+      try {
+        const decoded = typeof window !== "undefined" && window.atob ? window.atob(urlStr) : Buffer.from(urlStr, "base64").toString("utf8");
+        const clipMatch = decoded.match(/clip_?id["':\s]+(\d+)/i);
+        if (clipMatch) {
+          return `https://player.vimeo.com/video/${clipMatch[1]}`;
+        }
+      } catch {}
+    }
+
+    const srcMatch = urlStr.match(/src=["']([^"']+)["']/);
     if (srcMatch) urlStr = srcMatch[1];
     urlStr = urlStr.replace(/&amp;/g, "&");
+
+    // If it's a numeric Vimeo ID alone
+    if (/^\d+$/.test(urlStr)) {
+      return `https://player.vimeo.com/video/${urlStr}`;
+    }
+
     const u = new URL(urlStr);
     if (u.hostname.includes("youtube.com") && u.searchParams.get("v")) {
       return `https://www.youtube.com/embed/${u.searchParams.get("v")}?autoplay=1`;
@@ -19,12 +37,13 @@ const getEmbedUrl = (input: string) => {
       return `https://www.youtube.com/embed/${u.pathname.slice(1)}?autoplay=1`;
     }
     if (u.hostname.includes("vimeo.com") && !u.hostname.includes("player.vimeo.com")) {
-      const videoId = u.pathname.split("/").pop();
+      const videoId = u.pathname.split("/").filter(Boolean).pop();
       return `https://player.vimeo.com/video/${videoId}${u.search ? u.search : ""}`;
     }
     return urlStr;
   } catch {
-    return input;
+    // If not a valid absolute URL, never return relative path to avoid loading 404 page inside iframe
+    return "https://player.vimeo.com/video/1236241664";
   }
 };
 
@@ -36,8 +55,8 @@ export default function CourseDemoSection() {
   const [checkingStatus, setCheckingStatus] = useState(false);
 
   const [demoConfig, setDemoConfig] = useState<DemoConfig>({
-    v1: { title: "DEMO VIDEO 1: MASTERCLASS OVERVIEW", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" },
-    v2: { title: "DEMO VIDEO 2: BASICS OF EXPORTING", url: "https://player.vimeo.com/video/1197817919?h=31d77d474c" },
+    v1: { title: "DEMO VIDEO 1: MASTERCLASS OVERVIEW", url: "https://player.vimeo.com/video/1236241664" },
+    v2: { title: "DEMO VIDEO 2: BASICS OF EXPORTING", url: "https://player.vimeo.com/video/1236241664" },
     whatsapp: "+91 98765 43210"
   });
   const [activeVidIdx, setActiveVidIdx] = useState<0 | 1>(0);
@@ -749,10 +768,24 @@ export default function CourseDemoSection() {
                         />
                       );
                     }
+                    const embedUrl = getEmbedUrl(rawUrl);
+                    const isDirectVideo = embedUrl.endsWith(".mp4") || embedUrl.endsWith(".webm") || embedUrl.includes(".mp4?");
+                    if (isDirectVideo) {
+                      return (
+                        <video
+                          key={activeVidIdx}
+                          src={embedUrl}
+                          controls
+                          autoPlay
+                          playsInline
+                          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                        />
+                      );
+                    }
                     return (
                       <iframe
                         key={activeVidIdx}
-                        src={getEmbedUrl(rawUrl)}
+                        src={embedUrl}
                         frameBorder="0"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                         allowFullScreen

@@ -21,11 +21,11 @@ export interface DemoConfig {
 const DEFAULT_DEMO_CONFIG: DemoConfig = {
   v1: {
     title: "DEMO VIDEO 1: MASTERCLASS OVERVIEW",
-    url: "https://player.vimeo.com/video/1197817919?h=31d77d474c"
+    url: "https://player.vimeo.com/video/1236241664"
   },
   v2: {
     title: "DEMO VIDEO 2: BASICS OF EXPORTING",
-    url: "https://player.vimeo.com/video/1197817919?h=31d77d474c"
+    url: "https://player.vimeo.com/video/1236241664"
   },
   whatsapp: "+91 98765 43210"
 };
