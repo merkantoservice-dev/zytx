@@ -32,9 +32,22 @@ function ModuleThumbnail({ src, alt }: { src?: string; alt: string }) {
 
   if (!src || hasError) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0284c7] text-white p-3 text-center">
-        <span className="material-symbols-outlined text-3xl mb-1 opacity-90">school</span>
-        <span className="text-[11px] font-bold tracking-wider uppercase line-clamp-1 opacity-95">{alt}</span>
+      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-4 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#2563eb] text-white select-none">
+        <div className="flex items-center justify-between z-10">
+          <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+            <span className="material-symbols-outlined text-lg text-white">school</span>
+          </div>
+          <span className="text-[10px] font-bold tracking-wider uppercase bg-white/20 px-2.5 py-0.5 rounded-full backdrop-blur-md text-white/90">
+            ZYT X ACADEMY
+          </span>
+        </div>
+        <div className="z-10">
+          <span className="text-xs font-black tracking-wide uppercase line-clamp-1 text-white drop-shadow-sm">
+            {alt}
+          </span>
+        </div>
+        <div className="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-blue-400/20 blur-xl pointer-events-none" />
+        <div className="absolute -left-6 -top-6 w-24 h-24 rounded-full bg-sky-400/20 blur-lg pointer-events-none" />
       </div>
     );
   }
@@ -374,9 +387,9 @@ export default function AdminHubPage() {
 
       <DashboardSidebar activeIndex={0} brandLabel="ACADEMY PORTAL" role="admin" onNewVenture={openAddModal} />
 
-      <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
+      <div style={{ flex: 1, height: "100vh", overflowY: "auto", backgroundColor: "#f1f5f9" }} className="custom-scrollbar">
         {/* Header - Matching Neon Academy Administration Dashboard */}
-        <header className="sticky top-0 z-40 px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md shadow-xs">
+        <header className="sticky top-0 z-40 px-4 sm:px-6 md:px-8 py-3.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md shadow-xs">
           <div className="pl-11 md:pl-0 min-w-0">
             <h1 className="text-sm sm:text-base font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight">
               ADMINISTRATION PORTAL
@@ -389,7 +402,8 @@ export default function AdminHubPage() {
           <div className="relative shrink-0 ml-auto">
             <button
               onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-              className="flex items-center gap-2 bg-white border border-[#e2e8f0] hover:border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-xl shadow-xs transition-colors cursor-pointer"
+              style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0" }}
+              className="flex items-center gap-2 hover:border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-xl shadow-xs transition-colors cursor-pointer"
             >
               <div className="w-6 h-6 rounded-full bg-[#2563eb] text-white font-extrabold flex items-center justify-center text-[10px]">
                 E
@@ -437,12 +451,12 @@ export default function AdminHubPage() {
         </header>
 
         <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6 max-w-[1400px] mx-auto">
-          {/* Top 4 Stat Cards — Exact Proportion & Spacing from Reference */}
+          {/* Top 4 Stat Cards — Balanced Executive Metrics from Reference */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
               {/* Card 1: Active Modules */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-2">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">inventory_2</span>
@@ -452,10 +466,10 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{totalCourses}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{totalCourses}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
                     <span>active modules</span>
-                    <div className="w-12 h-1 bg-[#e2e8f0] rounded-full overflow-hidden">
+                    <div className="w-14 h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden">
                       <div className="w-3/5 h-full bg-[#2563eb] rounded-full" />
                     </div>
                   </div>
@@ -463,8 +477,8 @@ export default function AdminHubPage() {
               </div>
 
               {/* Card 2: Registered Students */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-2">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">group</span>
@@ -474,19 +488,19 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{enrolledStudents}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{enrolledStudents}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
                     <span>registered students</span>
-                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
-                      <path d="M2 14 Q 13 16, 23 8 T 44 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
+                      <path d="M2 13 Q 13 15, 23 7 T 44 2" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 3: Lessons Watched */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-2">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">play_circle</span>
@@ -496,24 +510,24 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{totalWatchedVideos}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{totalWatchedVideos}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
                     <span>video completions</span>
-                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
-                      <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.35" />
-                      <rect x="9" y="6" width="4" height="12" rx="1" fill="#2563eb" opacity="0.55" />
-                      <rect x="16" y="12" width="4" height="6" rx="1" fill="#2563eb" opacity="0.45" />
-                      <rect x="23" y="4" width="4" height="14" rx="1" fill="#2563eb" opacity="0.75" />
-                      <rect x="30" y="2" width="4" height="16" fill="#2563eb" />
-                      <rect x="37" y="8" width="4" height="10" rx="1" fill="#2563eb" opacity="0.65" />
+                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
+                      <rect x="2" y="9" width="4" height="7" rx="1" fill="#2563eb" opacity="0.35" />
+                      <rect x="9" y="5" width="4" height="11" rx="1" fill="#2563eb" opacity="0.55" />
+                      <rect x="16" y="10" width="4" height="6" rx="1" fill="#2563eb" opacity="0.45" />
+                      <rect x="23" y="3" width="4" height="13" rx="1" fill="#2563eb" opacity="0.75" />
+                      <rect x="30" y="1" width="4" height="15" rx="1" fill="#2563eb" />
+                      <rect x="37" y="6" width="4" height="10" rx="1" fill="#2563eb" opacity="0.65" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 4: Average Progress */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-2">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">trending_up</span>
@@ -523,11 +537,11 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{avgProgress}%</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{avgProgress}%</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
                     <span>per scholar avg</span>
-                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
-                      <path d="M2 15 C 16 15, 26 8, 44 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
+                      <path d="M2 14 C 16 14, 26 7, 44 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                 </div>
@@ -548,7 +562,8 @@ export default function AdminHubPage() {
                 </div>
                 <button
                   onClick={() => router.push("/dashboard/admin/demo-requests")}
-                  className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-colors shrink-0"
+                  style={{ backgroundColor: "#d97706", color: "#ffffff", border: "none" }}
+                  className="hover:bg-amber-700 font-bold text-xs px-3.5 py-1.5 rounded-lg transition-colors shrink-0 cursor-pointer"
                 >
                   Review →
                 </button>
@@ -558,7 +573,7 @@ export default function AdminHubPage() {
 
           {/* Middle Card 1: ACADEMY MODULES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
-            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-xs">
               <div className="flex items-center justify-between mb-5">
                 <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                   ACADEMY MODULES
@@ -577,13 +592,14 @@ export default function AdminHubPage() {
               {/* Upload Drop Zone - Matching Reference Box */}
               <div
                 onClick={openAddModal}
-                className="border-2 border-dashed border-[#cbd5e1] hover:border-[#93c5fd] rounded-xl p-8 sm:p-10 flex flex-col items-center justify-center text-center bg-[#f8fafc] hover:bg-[#eff6ff]/40 cursor-pointer transition-all"
+                style={{ border: "2px dashed #cbd5e1" }}
+                className="hover:border-[#2563eb] rounded-2xl p-7 sm:p-9 flex flex-col items-center justify-center text-center bg-[#f8fafc] hover:bg-[#eff6ff]/40 cursor-pointer transition-all"
               >
-                <div className="w-11 h-11 rounded-full bg-[#eff6ff] border border-[#bfdbfe] text-[#2563eb] flex items-center justify-center mb-3 shadow-xs">
-                  <span className="material-symbols-outlined text-2xl font-light">add</span>
+                <div className="w-11 h-11 rounded-full bg-[#eff6ff] border border-[#bfdbfe] text-[#2563eb] flex items-center justify-center mb-2.5 shadow-xs">
+                  <span className="material-symbols-outlined text-2xl">add</span>
                 </div>
                 <div className="text-sm sm:text-base font-bold text-[#0f172a]">Upload new module</div>
-                <div className="text-xs text-[#64748b] mt-1">Add video lessons, materials and resources</div>
+                <div className="text-xs text-[#64748b] mt-0.5">Add video lessons, materials and resources</div>
               </div>
 
               {/* Render Course Modules if any exist */}
@@ -604,13 +620,15 @@ export default function AdminHubPage() {
                       <div className="flex gap-2.5 mt-4 pt-3 border-t border-[#f1f5f9]">
                         <button
                           onClick={() => openEditModal(mod)}
-                          className="flex-1 bg-white border border-[#cbd5e1] hover:bg-slate-50 text-[#475569] font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
+                          style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#334155" }}
+                          className="flex-1 hover:bg-slate-50 font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDelete(mod.id, mod.title)}
-                          className="flex-1 bg-white border border-[#fecaca] hover:bg-red-50 text-[#dc2626] font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
+                          style={{ backgroundColor: "#fff5f5", border: "1px solid #fca5a5", color: "#dc2626" }}
+                          className="flex-1 hover:bg-red-50 font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
                         >
                           Delete
                         </button>
@@ -624,23 +642,24 @@ export default function AdminHubPage() {
 
           {/* Middle Card 2: ASSIGNMENTS & DELIVERABLES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}>
-            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
-              <div className="flex items-center justify-between mb-5">
+            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-xs">
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                   ASSIGNMENTS & DELIVERABLES
                 </h2>
               </div>
 
               {assignmentsLoaded && assignments.length === 0 ? (
-                <div className="py-10 px-4 flex flex-col items-center justify-center text-center">
-                  <div className="relative mb-3">
-                    <span className="material-symbols-outlined text-4xl text-[#94a3b8]">content_copy</span>
+                <div className="py-8 px-4 flex flex-col items-center justify-center text-center">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563eb] mb-2.5">
+                    <span className="material-symbols-outlined text-2xl">assignment_add</span>
                   </div>
                   <div className="text-sm sm:text-base font-bold text-[#0f172a]">No assignments published yet.</div>
-                  <div className="text-xs text-[#64748b] mt-1 mb-5">Click "Publish Work" to assign tasks to scholars.</div>
+                  <div className="text-xs text-[#64748b] mt-0.5 mb-5">Click "Publish Work" to assign tasks to scholars.</div>
                   <button
                     onClick={openAssignModal}
-                    className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-full text-xs flex items-center gap-1.5 shadow-md shadow-blue-500/20 transition-all cursor-pointer border-0"
+                    style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
+                    className="hover:bg-blue-700 font-bold px-6 py-2.5 rounded-full text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
                   >
                     <span className="material-symbols-outlined text-base">add</span>
                     Publish Work
@@ -648,22 +667,27 @@ export default function AdminHubPage() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <div className="flex justify-end">
                     <button
                       onClick={openAssignModal}
-                      style={{ backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, padding: "8px 20px", borderRadius: "9999px", border: "none", fontSize: "12px", display: "inline-flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
+                      style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
+                      className="font-bold px-5 py-2 rounded-full text-xs flex items-center gap-1.5 shadow-sm hover:bg-blue-700 transition-colors cursor-pointer"
                     >
-                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>add</span> Publish Work
+                      <span className="material-symbols-outlined text-base">add</span>
+                      Publish Work
                     </button>
                   </div>
                   {assignments.map((assign) => (
-                    <div key={assign.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px", padding: "16px", position: "relative" }}>
-                      <button onClick={() => { if(confirm(`Delete "${assign.title}"?`)) deleteAssignment(assign.id); }} style={{ position: "absolute", top: "12px", right: "12px", color: "#94a3b8", background: "none", border: "none", cursor: "pointer" }}>
-                        <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>delete</span>
+                    <div key={assign.id} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4 relative">
+                      <button
+                        onClick={() => { if(confirm(`Delete "${assign.title}"?`)) deleteAssignment(assign.id); }}
+                        className="absolute top-3 right-3 text-[#94a3b8] hover:text-[#dc2626] bg-transparent border-0 cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-lg">delete</span>
                       </button>
-                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>{assign.title}</div>
-                      <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px" }}>{assign.description}</div>
-                      <div style={{ fontSize: "12px", color: "#2563eb", fontWeight: 600, marginTop: "8px" }}>Due: {assign.dueDate}</div>
+                      <div className="text-sm font-bold text-[#0f172a]">{assign.title}</div>
+                      <div className="text-xs text-[#64748b] mt-1">{assign.description}</div>
+                      <div className="text-xs text-[#2563eb] font-semibold mt-2">Due: {assign.dueDate}</div>
                     </div>
                   ))}
                 </div>
@@ -675,7 +699,7 @@ export default function AdminHubPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
             {/* Left: Student Registry & Status */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}>
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-xs">
                 <div>
                   <div className="flex items-center justify-between mb-4 sm:mb-5">
                     <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
@@ -748,7 +772,7 @@ export default function AdminHubPage() {
 
             {/* Right: Administrators Registry */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.22 }}>
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-xs">
                 <div>
                   <div className="flex items-center justify-between mb-4 sm:mb-5">
                     <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
@@ -756,7 +780,8 @@ export default function AdminHubPage() {
                     </h2>
                     <button
                       onClick={() => setIsAdminModalOpen(true)}
-                      className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-colors cursor-pointer border-0"
+                      style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
+                      className="hover:bg-blue-700 font-bold text-xs px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-colors cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-base">add</span>
                       Add Admin
@@ -797,7 +822,8 @@ export default function AdminHubPage() {
                                 {admin.id !== "a1" ? (
                                   <button
                                     onClick={() => { if (confirm(`Revoke admin privileges for ${admin.name}?`)) deleteAdmin(admin.id); }}
-                                    className="border border-red-300 text-red-600 hover:bg-red-50 bg-white rounded-lg px-2.5 py-1 text-xs font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
+                                    style={{ backgroundColor: "#fff5f5", border: "1px solid #fca5a5", color: "#dc2626" }}
+                                    className="hover:bg-red-100 rounded-lg px-2.5 py-1 text-xs font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
                                   >
                                     <span className="material-symbols-outlined text-sm">delete</span>
                                     Revoke
