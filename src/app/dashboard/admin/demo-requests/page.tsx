@@ -168,13 +168,26 @@ export default function AdminDemoRequestsPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
-          <div className="pl-11 md:pl-0 min-w-0">
-            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
+        <header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 40,
+            padding: "20px 32px",
+            borderBottom: "1px solid #e2e8f0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: "rgba(255, 255, 255, 0.95)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div>
+            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               DEMO ACCESS & MEDIA CONTROL
             </h1>
-            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
-              Student Access Management <span className="text-[#cbd5e1] mx-1">/</span> Course Demo Stream Setup
+            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+              Student Access Management <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Course Demo Stream Setup
             </div>
           </div>
 
@@ -199,7 +212,7 @@ export default function AdminDemoRequestsPage() {
               }}
             >
               <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</span>
-              <span className="hidden sm:inline">View Live Demo</span>
+              View Live Demo
             </a>
 
             {demoRequests.length > 0 && (
@@ -210,7 +223,7 @@ export default function AdminDemoRequestsPage() {
                   color: "#dc2626",
                   border: "1px solid #fca5a5",
                   borderRadius: "8px",
-                  padding: "8px 12px",
+                  padding: "8px 14px",
                   fontSize: "12px",
                   fontWeight: 600,
                   display: "inline-flex",
@@ -220,13 +233,13 @@ export default function AdminDemoRequestsPage() {
                 }}
               >
                 <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete_sweep</span>
-                <span className="hidden sm:inline">Clear All</span>
+                Clear All
               </button>
             )}
           </div>
         </header>
 
-        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 md:gap-7 max-w-[1400px] mx-auto">
+        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
           
           {/* Quick Metrics Bar */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>

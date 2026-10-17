@@ -27,46 +27,10 @@ const emptySessionForm = (): SessionForm => ({
   img: ""
 });
 
-function ModuleThumbnail({ src, alt }: { src?: string; alt: string }) {
-  const [hasError, setHasError] = useState(false);
-
-  if (!src || hasError) {
-    return (
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-4 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#2563eb] text-white select-none">
-        <div className="flex items-center justify-between z-10">
-          <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-            <span className="material-symbols-outlined text-lg text-white">school</span>
-          </div>
-          <span className="text-[10px] font-bold tracking-wider uppercase bg-white/20 px-2.5 py-0.5 rounded-full backdrop-blur-md text-white/90">
-            ZYT X ACADEMY
-          </span>
-        </div>
-        <div className="z-10">
-          <span className="text-xs font-black tracking-wide uppercase line-clamp-1 text-white drop-shadow-sm">
-            {alt}
-          </span>
-        </div>
-        <div className="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-blue-400/20 blur-xl pointer-events-none" />
-        <div className="absolute -left-6 -top-6 w-24 h-24 rounded-full bg-sky-400/20 blur-lg pointer-events-none" />
-      </div>
-    );
-  }
-
-  return (
-    <img
-      src={src}
-      alt={alt}
-      onError={() => setHasError(true)}
-      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-    />
-  );
-}
-
 export default function AdminHubPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -347,7 +311,7 @@ export default function AdminHubPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", backgroundColor: "#f1f5f9" }}>
+      <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", backgroundColor: "#f8fafc" }}>
         <div style={{ color: "#2563eb", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", fontSize: "12px", fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -356,7 +320,7 @@ export default function AdminHubPage() {
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#f1f5f9", color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#f8fafc", color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -387,185 +351,229 @@ export default function AdminHubPage() {
 
       <DashboardSidebar activeIndex={0} brandLabel="ACADEMY PORTAL" role="admin" onNewVenture={openAddModal} />
 
-      <div style={{ flex: 1, height: "100vh", overflowY: "auto", backgroundColor: "#f1f5f9" }} className="custom-scrollbar">
-        {/* Header - Matching Neon Academy Administration Dashboard */}
-        <header className="sticky top-0 z-40 px-4 sm:px-6 md:px-8 py-3.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md shadow-xs">
-          <div className="pl-11 md:pl-0 min-w-0">
-            <h1 className="text-sm sm:text-base font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight">
+      <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
+        {/* Header */}
+        <header style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 40,
+          padding: "20px 32px",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(10px)",
+        }}>
+          <div>
+            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               ADMINISTRATION PORTAL
             </h1>
-            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
-              System Overview <span className="text-[#cbd5e1] mx-1">/</span> Command Center
+            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+              System Overview <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Command Center
             </div>
           </div>
-
-          <div className="relative shrink-0 ml-auto">
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginLeft: "auto" }}>
             <button
-              onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-              style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0" }}
-              className="flex items-center gap-2 hover:border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-xl shadow-xs transition-colors cursor-pointer"
+              onClick={async () => {
+                localStorage.removeItem("merkanto_role");
+                localStorage.removeItem("merkanto_user");
+                localStorage.removeItem("merkanto_user_name");
+                try {
+                  await supabase.auth.signOut();
+                } catch {}
+                router.push("/");
+              }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                backgroundColor: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#2563eb",
+                padding: "7px 14px",
+                borderRadius: "10px",
+                fontSize: "12px",
+                fontWeight: 700,
+                cursor: "pointer",
+                fontFamily: "Outfit, sans-serif",
+                transition: "all 0.2s ease"
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.backgroundColor = "#2563eb";
+                e.currentTarget.style.color = "#ffffff";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.backgroundColor = "#eff6ff";
+                e.currentTarget.style.color = "#2563eb";
+              }}
+              title="Return to Main Website (Requires password to re-enter)"
             >
-              <div className="w-6 h-6 rounded-full bg-[#2563eb] text-white font-extrabold flex items-center justify-center text-[10px]">
-                E
-              </div>
-              <span className="hidden md:inline text-[13px] font-semibold text-[#0f172a]">Executive Director</span>
-              <span className="material-symbols-outlined text-[16px] text-[#64748b]">
-                {profileMenuOpen ? "expand_less" : "expand_more"}
-              </span>
+              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_back</span>
+              Main Website
             </button>
 
-            <AnimatePresence>
-              {profileMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  className="absolute right-0 mt-2 w-48 bg-white border border-[#e2e8f0] rounded-xl shadow-lg py-1 z-50 text-xs"
-                >
-                  <a
-                    href="/"
-                    className="flex items-center gap-2 px-3 py-2 text-[#475569] hover:bg-slate-50 hover:text-[#0f172a] font-medium"
-                  >
-                    <span className="material-symbols-outlined text-base text-[#2563eb]">arrow_back</span>
-                    Return to Website
-                  </a>
-                  <button
-                    onClick={async () => {
-                      localStorage.removeItem("merkanto_role");
-                      localStorage.removeItem("merkanto_user");
-                      localStorage.removeItem("merkanto_user_name");
-                      try {
-                        await supabase.auth.signOut();
-                      } catch {}
-                      router.push("/");
-                    }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-50 font-medium text-left cursor-pointer border-t border-slate-100"
-                  >
-                    <span className="material-symbols-outlined text-base">logout</span>
-                    Sign out
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e2e8f0",
+              padding: "6px 14px",
+              borderRadius: "12px",
+              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
+            }}>
+              <div style={{ width: "28px", height: "28px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px" }}>
+                E
+              </div>
+              <span style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>Executive Director</span>
+              <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#64748b" }}>
+                expand_more
+              </span>
+            </div>
           </div>
         </header>
 
-        <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6 max-w-[1400px] mx-auto">
-          {/* Top 4 Stat Cards — Balanced Executive Metrics from Reference */}
+        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
+          {/* Top 4 Stat Cards */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
               {/* Card 1: Active Modules */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">inventory_2</span>
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>inventory_2</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">ACTIVE MODULES</span>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>ACTIVE MODULES</span>
                   </div>
-                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{totalCourses}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
+                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{totalCourses}</div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
                     <span>active modules</span>
-                    <div className="w-14 h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden">
-                      <div className="w-3/5 h-full bg-[#2563eb] rounded-full" />
-                    </div>
+                    <div style={{ width: "50px", height: "4px", backgroundColor: "#e2e8f0", borderRadius: "2px" }} />
                   </div>
                 </div>
               </div>
 
               {/* Card 2: Registered Students */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">group</span>
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>group</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">REGISTERED STUDENTS</span>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>REGISTERED STUDENTS</span>
                   </div>
-                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{enrolledStudents}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
+                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{enrolledStudents}</div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
                     <span>registered students</span>
-                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
-                      <path d="M2 13 Q 13 15, 23 7 T 44 2" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                      <path d="M2 14 Q 12 16, 22 8 T 43 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 3: Lessons Watched */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">play_circle</span>
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>play_circle</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">LESSONS WATCHED</span>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>LESSONS WATCHED</span>
                   </div>
-                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{totalWatchedVideos}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
+                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{totalWatchedVideos}</div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
                     <span>video completions</span>
-                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
-                      <rect x="2" y="9" width="4" height="7" rx="1" fill="#2563eb" opacity="0.35" />
-                      <rect x="9" y="5" width="4" height="11" rx="1" fill="#2563eb" opacity="0.55" />
-                      <rect x="16" y="10" width="4" height="6" rx="1" fill="#2563eb" opacity="0.45" />
-                      <rect x="23" y="3" width="4" height="13" rx="1" fill="#2563eb" opacity="0.75" />
-                      <rect x="30" y="1" width="4" height="15" rx="1" fill="#2563eb" />
-                      <rect x="37" y="6" width="4" height="10" rx="1" fill="#2563eb" opacity="0.65" />
+                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                      <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.4" />
+                      <rect x="9" y="6" width="4" height="12" rx="1" fill="#2563eb" opacity="0.6" />
+                      <rect x="16" y="12" width="4" height="6" rx="1" fill="#2563eb" opacity="0.5" />
+                      <rect x="23" y="4" width="4" height="14" rx="1" fill="#2563eb" opacity="0.8" />
+                      <rect x="30" y="2" width="4" height="16" rx="1" fill="#2563eb" />
+                      <rect x="37" y="8" width="4" height="10" rx="1" fill="#2563eb" opacity="0.7" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 4: Average Progress */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs hover:border-blue-300 transition-all">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">trending_up</span>
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>trending_up</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">AVERAGE PROGRESS</span>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>AVERAGE PROGRESS</span>
                   </div>
-                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2.5 tracking-tight">{avgProgress}%</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1.5 border-t border-slate-50">
+                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{avgProgress}%</div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#64748b", marginTop: "12px" }}>
                     <span>per scholar avg</span>
-                    <svg width="46" height="16" viewBox="0 0 46 16" fill="none" className="shrink-0">
-                      <path d="M2 14 C 16 14, 26 7, 44 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                    <svg width="45" height="18" viewBox="0 0 45 18" fill="none">
+                      <path d="M2 15 C 15 15, 25 8, 43 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 5: Demo Access Inquiries */}
+              <div
+                onClick={() => router.push("/dashboard/admin/demo-requests")}
+                style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)", cursor: "pointer", transition: "transform 0.15s ease", position: "relative" }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#2563eb" }}>play_circle</span>
+                    </div>
+                    <span style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", letterSpacing: "0.05em", textTransform: "uppercase" }}>DEMO INQUIRIES</span>
+                  </div>
+                  {pendingDemoCount > 0 && (
+                    <span style={{ backgroundColor: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", fontSize: "10px", fontWeight: 800, padding: "2px 8px", borderRadius: "9999px" }}>
+                      {pendingDemoCount} PENDING
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div style={{ fontSize: "38px", fontWeight: 900, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>{demoRequests.length}</div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "11px", color: "#2563eb", marginTop: "12px", fontWeight: 600 }}>
+                    <span>Manage Demo Access →</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Pending Demo Requests Notification Banner */}
+            {/* Pending Demo Requests Quick Alert Banner */}
             {pendingDemoCount > 0 && (
-              <div className="mt-4 bg-amber-50 border border-amber-200/80 rounded-xl px-4 py-3 flex items-center justify-between shadow-xs">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-amber-600 text-xl">notifications_active</span>
+              <div style={{ marginTop: "16px", backgroundColor: "#fffbeb", border: "1px solid #fde68a", borderRadius: "12px", padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span className="material-symbols-outlined" style={{ color: "#d97706", fontSize: "22px" }}>warning</span>
                   <div>
-                    <span className="text-xs sm:text-sm font-bold text-amber-900">
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#92400e" }}>
                       {pendingDemoCount} Candidate{pendingDemoCount > 1 ? "s" : ""} awaiting demo course access approval
                     </span>
-                    <div className="text-[11px] text-amber-700">Review submissions in Demo Requests to grant video playback access immediately.</div>
+                    <div style={{ fontSize: "11px", color: "#b45309" }}>Review submissions to grant video playback access immediately.</div>
                   </div>
                 </div>
                 <button
                   onClick={() => router.push("/dashboard/admin/demo-requests")}
-                  style={{ backgroundColor: "#d97706", color: "#ffffff", border: "none" }}
-                  className="hover:bg-amber-700 font-bold text-xs px-3.5 py-1.5 rounded-lg transition-colors shrink-0 cursor-pointer"
+                  style={{ backgroundColor: "#d97706", color: "#ffffff", border: "none", borderRadius: "8px", padding: "8px 16px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
                 >
-                  Review →
+                  Review Inquiries →
                 </button>
               </div>
             )}
@@ -573,63 +581,66 @@ export default function AdminHubPage() {
 
           {/* Middle Card 1: ACADEMY MODULES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
-            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-xs">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
+            <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+                <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
                   ACADEMY MODULES
                 </h2>
                 <button
                   onClick={() => setViewAll(!viewAll)}
-                  className="bg-transparent border-0 text-[#2563eb] text-xs font-semibold flex items-center gap-1 hover:underline cursor-pointer p-0"
+                  style={{ backgroundColor: "transparent", border: "none", color: "#2563eb", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
                 >
                   {viewAll ? "Show Less" : "View All"}
-                  <span className="material-symbols-outlined text-base">
+                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
                     {viewAll ? "expand_less" : "arrow_forward"}
                   </span>
                 </button>
               </div>
 
-              {/* Upload Drop Zone - Matching Reference Box */}
+              {/* Upload Drop Zone */}
               <div
                 onClick={openAddModal}
-                style={{ border: "2px dashed #cbd5e1" }}
-                className="hover:border-[#2563eb] rounded-2xl p-7 sm:p-9 flex flex-col items-center justify-center text-center bg-[#f8fafc] hover:bg-[#eff6ff]/40 cursor-pointer transition-all"
+                style={{
+                  border: "1px dashed #cbd5e1",
+                  borderRadius: "14px",
+                  padding: "36px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  backgroundColor: "#f8fafc",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease"
+                }}
               >
-                <div className="w-11 h-11 rounded-full bg-[#eff6ff] border border-[#bfdbfe] text-[#2563eb] flex items-center justify-center mb-2.5 shadow-xs">
-                  <span className="material-symbols-outlined text-2xl">add</span>
+                <div style={{ width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", color: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>add</span>
                 </div>
-                <div className="text-sm sm:text-base font-bold text-[#0f172a]">Upload new module</div>
-                <div className="text-xs text-[#64748b] mt-0.5">Add video lessons, materials and resources</div>
+                <div style={{ fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>Upload new module</div>
+                <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px" }}>Add video lessons, materials and resources</div>
               </div>
 
               {/* Render Course Modules if any exist */}
               {coursesLoaded && courses.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 mt-5">
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginTop: "20px" }}>
                   {displayedCourses.map((mod) => (
-                    <div key={mod.id} className="bg-white border border-[#e2e8f0] rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
+                    <div key={mod.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                       <div>
-                        <div className="h-36 sm:h-40 rounded-lg overflow-hidden mb-3 bg-slate-100 border border-slate-200">
-                          <ModuleThumbnail src={mod.img} alt={mod.title} />
+                        <div style={{ height: "140px", borderRadius: "10px", overflow: "hidden", marginBottom: "12px", backgroundColor: "#e2e8f0" }}>
+                          <img src={mod.img || "/images/brochure_page24_img1.jpeg"} alt={mod.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
-                        <h4 className="text-sm font-bold text-[#0f172a] m-0 line-clamp-1">{mod.title}</h4>
-                        <div className="text-xs text-[#64748b] mt-1.5 flex items-center gap-1.5">
-                          <span className="material-symbols-outlined text-sm text-[#94a3b8]">video_library</span>
+                        <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", margin: 0 }}>{mod.title}</h4>
+                        <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>video_library</span>
                           {mod.sessions?.length || 0} Lessons
                         </div>
                       </div>
-                      <div className="flex gap-2.5 mt-4 pt-3 border-t border-[#f1f5f9]">
-                        <button
-                          onClick={() => openEditModal(mod)}
-                          style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#334155" }}
-                          className="flex-1 hover:bg-slate-50 font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
-                        >
+                      <div style={{ display: "flex", gap: "10px", marginTop: "16px", paddingTop: "12px", borderTop: "1px solid #e2e8f0" }}>
+                        <button onClick={() => openEditModal(mod)} style={{ flex: 1, backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#475569", borderRadius: "8px", padding: "8px 0", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}>
                           Edit
                         </button>
-                        <button
-                          onClick={() => handleDelete(mod.id, mod.title)}
-                          style={{ backgroundColor: "#fff5f5", border: "1px solid #fca5a5", color: "#dc2626" }}
-                          className="flex-1 hover:bg-red-50 font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
-                        >
+                        <button onClick={() => handleDelete(mod.id, mod.title)} style={{ flex: 1, backgroundColor: "#fef2f2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: "8px", padding: "8px 0", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}>
                           Delete
                         </button>
                       </div>
@@ -642,52 +653,62 @@ export default function AdminHubPage() {
 
           {/* Middle Card 2: ASSIGNMENTS & DELIVERABLES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}>
-            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-xs">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
+            <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+                <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
                   ASSIGNMENTS & DELIVERABLES
                 </h2>
               </div>
 
               {assignmentsLoaded && assignments.length === 0 ? (
-                <div className="py-8 px-4 flex flex-col items-center justify-center text-center">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#2563eb] mb-2.5">
-                    <span className="material-symbols-outlined text-2xl">assignment_add</span>
+                <div style={{ padding: "40px 20px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+                  <div style={{ position: "relative", marginBottom: "12px" }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: "42px", color: "#94a3b8" }}>content_copy</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: "absolute", top: "-6px", right: "-6px" }}>
+                      <path d="M12 2L12 6M2 12L6 12M18 12L22 12" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
+                    </svg>
                   </div>
-                  <div className="text-sm sm:text-base font-bold text-[#0f172a]">No assignments published yet.</div>
-                  <div className="text-xs text-[#64748b] mt-0.5 mb-5">Click "Publish Work" to assign tasks to scholars.</div>
+                  <div style={{ fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>No assignments published yet.</div>
+                  <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", marginBottom: "20px" }}>Click "Publish Work" to assign tasks to scholars.</div>
                   <button
                     onClick={openAssignModal}
-                    style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
-                    className="hover:bg-blue-700 font-bold px-6 py-2.5 rounded-full text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                    style={{
+                      backgroundColor: "#2563eb",
+                      color: "#ffffff",
+                      fontWeight: 700,
+                      padding: "10px 24px",
+                      borderRadius: "9999px",
+                      border: "none",
+                      fontSize: "13px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      cursor: "pointer",
+                      boxShadow: "0 4px 15px rgba(37, 99, 235, 0.25)"
+                    }}
                   >
-                    <span className="material-symbols-outlined text-base">add</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>add</span>
                     Publish Work
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-col gap-4">
-                  <div className="flex justify-end">
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       onClick={openAssignModal}
-                      style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
-                      className="font-bold px-5 py-2 rounded-full text-xs flex items-center gap-1.5 shadow-sm hover:bg-blue-700 transition-colors cursor-pointer"
+                      style={{ backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, padding: "8px 20px", borderRadius: "9999px", border: "none", fontSize: "12px", display: "inline-flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
                     >
-                      <span className="material-symbols-outlined text-base">add</span>
-                      Publish Work
+                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>add</span> Publish Work
                     </button>
                   </div>
                   {assignments.map((assign) => (
-                    <div key={assign.id} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-4 relative">
-                      <button
-                        onClick={() => { if(confirm(`Delete "${assign.title}"?`)) deleteAssignment(assign.id); }}
-                        className="absolute top-3 right-3 text-[#94a3b8] hover:text-[#dc2626] bg-transparent border-0 cursor-pointer"
-                      >
-                        <span className="material-symbols-outlined text-lg">delete</span>
+                    <div key={assign.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px", padding: "16px", position: "relative" }}>
+                      <button onClick={() => { if(confirm(`Delete "${assign.title}"?`)) deleteAssignment(assign.id); }} style={{ position: "absolute", top: "12px", right: "12px", color: "#94a3b8", background: "none", border: "none", cursor: "pointer" }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>delete</span>
                       </button>
-                      <div className="text-sm font-bold text-[#0f172a]">{assign.title}</div>
-                      <div className="text-xs text-[#64748b] mt-1">{assign.description}</div>
-                      <div className="text-xs text-[#2563eb] font-semibold mt-2">Due: {assign.dueDate}</div>
+                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>{assign.title}</div>
+                      <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px" }}>{assign.description}</div>
+                      <div style={{ fontSize: "12px", color: "#2563eb", fontWeight: 600, marginTop: "8px" }}>Due: {assign.dueDate}</div>
                     </div>
                   ))}
                 </div>
@@ -695,32 +716,32 @@ export default function AdminHubPage() {
             </div>
           </motion.section>
 
-          {/* Bottom Split Row: Student Registry & Admin Registry — Exact Reference Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+          {/* Bottom Split Row: Student Registry & Admin Registry */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
             {/* Left: Student Registry & Status */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}>
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-xs">
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
                 <div>
-                  <div className="flex items-center justify-between mb-4 sm:mb-5">
-                    <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+                    <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
                       STUDENT REGISTRY & STATUS
                     </h2>
                     <button
                       onClick={() => router.push("/dashboard/admin/students")}
-                      className="bg-transparent border-0 text-[#2563eb] text-xs font-semibold flex items-center gap-1 hover:underline cursor-pointer p-0"
+                      style={{ backgroundColor: "transparent", border: "none", color: "#2563eb", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px", cursor: "pointer" }}
                     >
-                      Go to Student Registry <span className="material-symbols-outlined text-base">arrow_forward</span>
+                      Go to Student Registry <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_forward</span>
                     </button>
                   </div>
 
-                  <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
-                    <table className="w-full border-collapse text-left min-w-[440px] sm:min-w-full">
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                       <thead>
-                        <tr className="border-b border-[#e2e8f0]">
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">STUDENT</th>
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">LESSONS MATCHED</th>
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">PROGRESS</th>
-                          <th className="pb-3 w-6"></th>
+                        <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>STUDENT</th>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>LESSONS MATCHED</th>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>PROGRESS</th>
+                          <th style={{ paddingBottom: "12px" }}></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -734,31 +755,31 @@ export default function AdminHubPage() {
                           const initial = student.name ? student.name.charAt(0).toUpperCase() : "S";
 
                           return (
-                            <tr key={student.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-slate-50/50 transition-colors">
-                              <td className="py-3 sm:py-3.5 pr-3">
-                                <div className="flex items-center gap-2.5 sm:gap-3">
-                                  <div className="w-8 h-8 rounded-full bg-[#2563eb] text-white font-bold text-xs flex items-center justify-center shrink-0">
+                            <tr key={student.id} style={{ borderBottom: "1px solid #e2e8f0" }}>
+                              <td style={{ padding: "14px 12px 14px 0" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                  <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, fontSize: "13px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                                     {initial}
                                   </div>
-                                  <div className="min-w-0">
-                                    <div className="text-xs sm:text-sm font-bold text-[#0f172a] truncate">{student.name}</div>
-                                    <div className="text-[11px] text-[#64748b] truncate">{student.email}</div>
+                                  <div>
+                                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>{student.name}</div>
+                                    <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>{student.email}</div>
                                   </div>
                                 </div>
                               </td>
-                              <td className="py-3 sm:py-3.5 px-3 text-xs text-[#475569] whitespace-nowrap">
+                              <td style={{ padding: "14px 12px", fontSize: "12px", color: "#475569", whiteSpace: "nowrap" }}>
                                 {watchedSessions} Lessons Matched
                               </td>
-                              <td className="py-3 sm:py-3.5 px-3">
-                                <div className="flex items-center gap-2.5">
-                                  <div className="w-20 sm:w-28 h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden shrink-0">
-                                    <div style={{ width: `${dynamicProgress}%` }} className="h-full bg-[#2563eb] rounded-full" />
+                              <td style={{ padding: "14px 12px" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                  <div style={{ width: "100px", height: "6px", backgroundColor: "#e2e8f0", borderRadius: "9999px", overflow: "hidden" }}>
+                                    <div style={{ width: `${dynamicProgress}%`, height: "100%", backgroundColor: "#2563eb", borderRadius: "9999px" }} />
                                   </div>
-                                  <span className="text-xs font-bold text-[#0f172a] min-w-[28px]">{dynamicProgress}%</span>
+                                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#0f172a" }}>{dynamicProgress}%</span>
                                 </div>
                               </td>
-                              <td className="py-3 sm:py-3.5 pl-2 text-right">
-                                <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer">more_vert</span>
+                              <td style={{ padding: "14px 0 14px 12px", textAlign: "right" }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_vert</span>
                               </td>
                             </tr>
                           );
@@ -772,64 +793,62 @@ export default function AdminHubPage() {
 
             {/* Right: Administrators Registry */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.22 }}>
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-xs">
+              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
                 <div>
-                  <div className="flex items-center justify-between mb-4 sm:mb-5">
-                    <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+                    <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
                       ADMINISTRATORS REGISTRY
                     </h2>
                     <button
                       onClick={() => setIsAdminModalOpen(true)}
-                      style={{ backgroundColor: "#2563eb", color: "#ffffff", border: "none" }}
-                      className="hover:bg-blue-700 font-bold text-xs px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-colors cursor-pointer"
+                      style={{ backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, padding: "8px 16px", borderRadius: "8px", border: "none", fontSize: "12px", display: "inline-flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
                     >
-                      <span className="material-symbols-outlined text-base">add</span>
+                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>add</span>
                       Add Admin
                     </button>
                   </div>
 
-                  <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
-                    <table className="w-full border-collapse text-left min-w-[380px] sm:min-w-full">
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                       <thead>
-                        <tr className="border-b border-[#e2e8f0]">
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">ADMINISTRATOR</th>
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">ROLE</th>
-                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3 text-right">ACTIONS</th>
+                        <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>ADMINISTRATOR</th>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>ROLE</th>
+                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px", textAlign: "right" }}>ACTIONS</th>
                         </tr>
                       </thead>
                       <tbody>
                         {adminsLoaded && admins.map((admin) => {
                           const initial = admin.name ? admin.name.charAt(0).toUpperCase() : "A";
                           return (
-                            <tr key={admin.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-slate-50/50 transition-colors">
-                              <td className="py-3 sm:py-3.5 pr-3">
-                                <div className="flex items-center gap-2.5 sm:gap-3">
-                                  <div className="w-8 h-8 rounded-full bg-[#2563eb] text-white font-bold text-xs flex items-center justify-center shrink-0">
+                            <tr key={admin.id} style={{ borderBottom: "1px solid #e2e8f0" }}>
+                              <td style={{ padding: "14px 12px 14px 0" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                  <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, fontSize: "13px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                                     {initial}
                                   </div>
-                                  <div className="min-w-0">
-                                    <div className="text-xs sm:text-sm font-bold text-[#0f172a] truncate">{admin.name}</div>
-                                    <div className="text-[11px] text-[#64748b] truncate">{admin.email}</div>
+                                  <div>
+                                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>{admin.name}</div>
+                                    <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>{admin.email}</div>
                                   </div>
                                 </div>
                               </td>
-                              <td className="py-3 sm:py-3.5 px-3">
-                                <span className="bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe] rounded-full px-2.5 py-0.5 text-[11px] font-semibold inline-block whitespace-nowrap">
+                              <td style={{ padding: "14px 12px" }}>
+                                <span style={{ backgroundColor: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "9999px", padding: "4px 12px", fontSize: "11px", fontWeight: 600, display: "inline-block" }}>
                                   Administrator
                                 </span>
                               </td>
-                              <td className="py-3 sm:py-3.5 pl-3 text-right">
+                              <td style={{ padding: "14px 0 14px 12px", textAlign: "right" }}>
                                 {admin.id !== "a1" ? (
                                   <button
                                     onClick={() => { if (confirm(`Revoke admin privileges for ${admin.name}?`)) deleteAdmin(admin.id); }}
-                                    style={{ backgroundColor: "#fff5f5", border: "1px solid #fca5a5", color: "#dc2626" }}
-                                    className="hover:bg-red-100 rounded-lg px-2.5 py-1 text-xs font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
+                                    style={{ backgroundColor: "#fef2f2", color: "#dc2626", border: "1px solid #fca5a5", borderRadius: "8px", padding: "6px 12px", fontSize: "12px", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "4px", cursor: "pointer" }}
                                   >
-                                    <span className="material-symbols-outlined text-sm">delete</span>
+                                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>delete</span>
                                     Revoke
                                   </button>
                                 ) : (
-                                  <span className="text-xs text-[#94a3b8] font-medium">Primary</span>
+                                  <span style={{ fontSize: "12px", color: "#94a3b8" }}>Primary</span>
                                 )}
                               </td>
                             </tr>
@@ -840,7 +859,7 @@ export default function AdminHubPage() {
                   </div>
                 </div>
 
-                <div className="text-xs text-[#64748b] pt-3.5 border-t border-[#e2e8f0] mt-3">
+                <div style={{ fontSize: "12px", color: "#64748b", paddingTop: "16px", borderTop: "1px solid #e2e8f0", marginTop: "16px" }}>
                   Active system administrators: {admins.length}
                 </div>
               </div>

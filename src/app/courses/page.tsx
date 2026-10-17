@@ -53,7 +53,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      <section className="px-5 py-12 md:px-16 md:py-24">
+      <section style={{ padding: '6rem 4rem' }}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -61,7 +61,7 @@ export default function CoursesPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>01</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px', lineHeight: 1.15 }}>Knowledge is another form of leverage.</h2>
+            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Knowledge is another form of leverage.</h2>
           </div>
           <div style={{ paddingTop: '1rem' }}>
             <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
@@ -71,7 +71,7 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      <section id="courses-list" className="px-5 py-8 md:px-16 md:py-24">
+      <section id="courses-list" style={{ padding: '4rem 4rem 6rem' }}>
         <div className={styles.courseItem}>
           <div className={styles.approachStepNumber}>01</div>
           <div>

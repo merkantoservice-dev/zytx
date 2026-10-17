@@ -118,18 +118,29 @@ export default function AdminQAPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
-          <div className="pl-11 md:pl-0 min-w-0">
-            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
+        <header style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 40,
+          padding: "20px 32px",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(10px)",
+        }}>
+          <div>
+            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               Q&A COMMAND CENTER
             </h1>
-            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
-              Global Student Inquiries <span className="text-[#cbd5e1] mx-1">/</span> Course Forum Support
+            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+              Global Student Inquiries <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Course Forum Support
             </div>
           </div>
         </header>
 
-        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 max-w-[1400px] mx-auto">
+        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
           {/* Course Filter Selector */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", textTransform: "uppercase" }}>Filter Course:</span>

@@ -12,14 +12,14 @@ export default function AboutPage() {
   return (
     <main className={styles.main}>
       <div className={styles.pageHeader}>
-        <span className={styles.sectionLabel} style={{ display: 'block', marginBottom: '1.5rem' }}>ABOUT ZYT X</span>
+        <span className={styles.sectionLabel} style={{ display: 'block', marginBottom: '2rem' }}>ABOUT ZYT X</span>
         <h1 className={styles.pageHeaderTitle}>Direction creates momentum.</h1>
         <p className={styles.pageHeaderSubtitle}>
           ZYT X is built around a simple belief: meaningful growth begins with clarity and moves forward through execution.
         </p>
       </div>
 
-      <section className="px-5 py-12 md:px-16 md:py-24">
+      <section style={{ padding: '6rem 4rem' }}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -27,22 +27,20 @@ export default function AboutPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>01</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.5px', lineHeight: 1.15 }}>
-              Built for opportunity.
-            </h2>
+            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Built for opportunity.</h2>
           </div>
-          <div style={{ paddingTop: '0.5rem' }}>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+          <div style={{ paddingTop: '1rem' }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
               ZYT X operates across business development and trading, identifying opportunities and transforming strategic direction into measurable progress.
             </p>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
               Our approach combines market awareness, strong relationships and disciplined execution to create long-term value.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-12 md:px-16 md:py-24" style={{ backgroundColor: 'var(--gray-light)' }}>
+      <section style={{ padding: '6rem 4rem', backgroundColor: 'var(--gray-light)' }}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -50,32 +48,30 @@ export default function AboutPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>02</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.5px', lineHeight: 1.15 }}>
-              Growth with direction.
-            </h2>
+            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Growth with direction.</h2>
           </div>
-          <div style={{ paddingTop: '0.5rem' }}>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', lineHeight: 1.6, marginBottom: '1.5rem', fontWeight: 600, color: 'var(--navy)' }}>
+          <div style={{ paddingTop: '1rem' }}>
+            <p style={{ fontSize: '1.25rem', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 500, color: 'var(--navy)' }}>
               We don't believe in movement for the sake of movement.
             </p>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
               Every opportunity should have purpose. Every strategy should have direction. And every action should contribute toward measurable progress.
             </p>
-            <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
               That philosophy is represented directly in the ZYT X identity: the upward arrow integrated into the X represents growth, expansion and strategic acceleration.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-12 md:px-16 md:py-24">
+      <section style={{ padding: '8rem 4rem' }}>
         <div className={styles.sectionHeaderLineBlock}>
           <span className={styles.sectionLabel}>WHAT DRIVES US</span>
           <div className={styles.line}></div>
           <span className={styles.sectionNumber}>03</span>
         </div>
         
-        <div className={styles.grid4} style={{ marginTop: '2.5rem' }}>
+        <div className={styles.grid4} style={{ marginTop: '4rem' }}>
           <div className={styles.valueCard}>
             <h3>Clarity</h3>
             <p>Understand the opportunity before acting.</p>
@@ -96,9 +92,7 @@ export default function AboutPage() {
       </section>
 
       <div className={styles.darkBanner}>
-        <h2 style={{ fontSize: 'clamp(1.85rem, 5vw, 3.25rem)', lineHeight: 1.15 }}>
-          Built on insight.<br/>Driven by execution.<br/>Focused on what's next.
-        </h2>
+        <h2>Built on insight.<br/>Driven by execution.<br/>Focused on what's next.</h2>
         <Link href="/contact" className={styles.btnWhite}>
           Work With ZYT X
           <ArrowIcon />

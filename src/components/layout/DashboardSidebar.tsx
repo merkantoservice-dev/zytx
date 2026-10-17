@@ -207,10 +207,10 @@ export default function DashboardSidebar({
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-2.5 left-2.5 z-50 w-9 h-9 bg-white border border-[#e2e8f0] rounded-xl text-[#475569] shadow-sm flex items-center justify-center hover:bg-slate-50 transition-colors"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-[#e2e8f0] rounded-lg text-[#475569] shadow-md"
         aria-label="Open navigation"
       >
-        <span className="material-symbols-outlined text-[20px]">menu</span>
+        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>menu</span>
       </button>
 
       <AnimatePresence>

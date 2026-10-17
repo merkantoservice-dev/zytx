@@ -144,13 +144,24 @@ export default function StudentManagementPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
-          <div className="pl-11 md:pl-0 min-w-0">
-            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
+        <header style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 40,
+          padding: "20px 32px",
+          borderBottom: "1px solid #e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(10px)",
+        }}>
+          <div>
+            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
               STUDENTS REGISTRY
             </h1>
-            <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
-              Scholar Registry <span className="text-[#cbd5e1] mx-1">/</span> Enrollment Control
+            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+              Scholar Registry <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Enrollment Control
             </div>
           </div>
           <button
@@ -159,7 +170,7 @@ export default function StudentManagementPage() {
               backgroundColor: "#2563eb",
               color: "#ffffff",
               fontWeight: 700,
-              padding: "9px 16px",
+              padding: "10px 20px",
               borderRadius: "8px",
               border: "none",
               fontSize: "12px",
@@ -171,11 +182,11 @@ export default function StudentManagementPage() {
             }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>person_add</span>
-            <span className="hidden sm:inline">Enroll Student</span>
+            Enroll Student
           </button>
         </header>
 
-        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 max-w-[1400px] mx-auto">
+        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
           {/* Stats Cards */}
           <motion.div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>

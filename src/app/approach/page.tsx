@@ -19,7 +19,7 @@ export default function ApproachPage() {
         </p>
       </div>
 
-      <section className="px-5 py-12 md:px-16 md:py-24">
+      <section style={{ padding: '8rem 4rem' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           
           <div className={styles.approachStep}>
