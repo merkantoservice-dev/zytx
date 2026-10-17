@@ -27,10 +27,33 @@ const emptySessionForm = (): SessionForm => ({
   img: ""
 });
 
+function ModuleThumbnail({ src, alt }: { src?: string; alt: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0284c7] text-white p-3 text-center">
+        <span className="material-symbols-outlined text-3xl mb-1 opacity-90">school</span>
+        <span className="text-[11px] font-bold tracking-wider uppercase line-clamp-1 opacity-95">{alt}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      onError={() => setHasError(true)}
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  );
+}
+
 export default function AdminHubPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -311,7 +334,7 @@ export default function AdminHubPage() {
 
   if (!mounted || !authChecked) {
     return (
-      <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", backgroundColor: "#f8fafc" }}>
+      <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", backgroundColor: "#f1f5f9" }}>
         <div style={{ color: "#2563eb", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", fontSize: "12px", fontFamily: "Geist, monospace" }}>
           Authenticating Session...
         </div>
@@ -320,7 +343,7 @@ export default function AdminHubPage() {
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#f8fafc", color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#f1f5f9", color: "#0f172a", fontFamily: "Outfit, sans-serif" }}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -352,53 +375,74 @@ export default function AdminHubPage() {
       <DashboardSidebar activeIndex={0} brandLabel="ACADEMY PORTAL" role="admin" onNewVenture={openAddModal} />
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
-        {/* Header */}
-        <header className="sticky top-0 z-40 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md">
+        {/* Header - Matching Neon Academy Administration Dashboard */}
+        <header className="sticky top-0 z-40 px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-b border-[#e2e8f0] flex items-center justify-between bg-white/95 backdrop-blur-md shadow-xs">
           <div className="pl-11 md:pl-0 min-w-0">
-            <h1 className="text-sm sm:text-lg font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight truncate">
+            <h1 className="text-sm sm:text-base font-black text-[#0f172a] tracking-wider uppercase m-0 leading-tight">
               ADMINISTRATION PORTAL
             </h1>
             <div className="text-[10px] sm:text-xs font-medium text-[#64748b] mt-0.5 truncate">
               System Overview <span className="text-[#cbd5e1] mx-1">/</span> Command Center
             </div>
           </div>
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 ml-auto">
-            <button
-              onClick={async () => {
-                localStorage.removeItem("merkanto_role");
-                localStorage.removeItem("merkanto_user");
-                localStorage.removeItem("merkanto_user_name");
-                try {
-                  await supabase.auth.signOut();
-                } catch {}
-                router.push("/");
-              }}
-              className="flex items-center gap-1.5 bg-[#eff6ff] hover:bg-[#2563eb] text-[#2563eb] hover:text-white border border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
-              title="Return to Main Website"
-            >
-              <span className="material-symbols-outlined text-[15px]">arrow_back</span>
-              <span className="hidden sm:inline">Main Website</span>
-            </button>
 
-            <div className="flex items-center gap-1.5 sm:gap-2 bg-white border border-[#e2e8f0] px-2 sm:px-3 py-1.5 rounded-xl shadow-xs">
+          <div className="relative shrink-0 ml-auto">
+            <button
+              onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+              className="flex items-center gap-2 bg-white border border-[#e2e8f0] hover:border-[#bfdbfe] px-2.5 sm:px-3 py-1.5 rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
               <div className="w-6 h-6 rounded-full bg-[#2563eb] text-white font-extrabold flex items-center justify-center text-[10px]">
                 E
               </div>
               <span className="hidden md:inline text-[13px] font-semibold text-[#0f172a]">Executive Director</span>
               <span className="material-symbols-outlined text-[16px] text-[#64748b]">
-                expand_more
+                {profileMenuOpen ? "expand_less" : "expand_more"}
               </span>
-            </div>
+            </button>
+
+            <AnimatePresence>
+              {profileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  className="absolute right-0 mt-2 w-48 bg-white border border-[#e2e8f0] rounded-xl shadow-lg py-1 z-50 text-xs"
+                >
+                  <a
+                    href="/"
+                    className="flex items-center gap-2 px-3 py-2 text-[#475569] hover:bg-slate-50 hover:text-[#0f172a] font-medium"
+                  >
+                    <span className="material-symbols-outlined text-base text-[#2563eb]">arrow_back</span>
+                    Return to Website
+                  </a>
+                  <button
+                    onClick={async () => {
+                      localStorage.removeItem("merkanto_role");
+                      localStorage.removeItem("merkanto_user");
+                      localStorage.removeItem("merkanto_user_name");
+                      try {
+                        await supabase.auth.signOut();
+                      } catch {}
+                      router.push("/");
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-50 font-medium text-left cursor-pointer border-t border-slate-100"
+                  >
+                    <span className="material-symbols-outlined text-base">logout</span>
+                    Sign out
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </header>
 
-        <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-7 max-w-[1400px] mx-auto">
-          {/* Top 4 Stat Cards — Exact Symmetrical Design from Reference */}
+        <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6 max-w-[1400px] mx-auto">
+          {/* Top 4 Stat Cards — Exact Proportion & Spacing from Reference */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
               {/* Card 1: Active Modules */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">inventory_2</span>
@@ -408,8 +452,8 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{totalCourses}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{totalCourses}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
                     <span>active modules</span>
                     <div className="w-12 h-1 bg-[#e2e8f0] rounded-full overflow-hidden">
                       <div className="w-3/5 h-full bg-[#2563eb] rounded-full" />
@@ -419,8 +463,8 @@ export default function AdminHubPage() {
               </div>
 
               {/* Card 2: Registered Students */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">group</span>
@@ -430,8 +474,8 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{enrolledStudents}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{enrolledStudents}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
                     <span>registered students</span>
                     <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
                       <path d="M2 14 Q 13 16, 23 8 T 44 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
@@ -441,8 +485,8 @@ export default function AdminHubPage() {
               </div>
 
               {/* Card 3: Lessons Watched */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">play_circle</span>
@@ -452,8 +496,8 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{totalWatchedVideos}</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{totalWatchedVideos}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
                     <span>video completions</span>
                     <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
                       <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.35" />
@@ -468,8 +512,8 @@ export default function AdminHubPage() {
               </div>
 
               {/* Card 4: Average Progress */}
-              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:border-blue-300 transition-all">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
                       <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">trending_up</span>
@@ -479,8 +523,8 @@ export default function AdminHubPage() {
                   <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{avgProgress}%</div>
-                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-2.5 tracking-tight">{avgProgress}%</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b] pt-1">
                     <span>per scholar avg</span>
                     <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
                       <path d="M2 15 C 16 15, 26 8, 44 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
@@ -514,74 +558,60 @@ export default function AdminHubPage() {
 
           {/* Middle Card 1: ACADEMY MODULES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
-            <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-                <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
+            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                   ACADEMY MODULES
                 </h2>
                 <button
                   onClick={() => setViewAll(!viewAll)}
-                  style={{ backgroundColor: "transparent", border: "none", color: "#2563eb", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
+                  className="bg-transparent border-0 text-[#2563eb] text-xs font-semibold flex items-center gap-1 hover:underline cursor-pointer p-0"
                 >
                   {viewAll ? "Show Less" : "View All"}
-                  <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
+                  <span className="material-symbols-outlined text-base">
                     {viewAll ? "expand_less" : "arrow_forward"}
                   </span>
                 </button>
               </div>
 
-              {/* Upload Drop Zone */}
+              {/* Upload Drop Zone - Matching Reference Box */}
               <div
                 onClick={openAddModal}
-                style={{
-                  border: "1px dashed #cbd5e1",
-                  borderRadius: "14px",
-                  padding: "36px 20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  backgroundColor: "#f8fafc",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease"
-                }}
+                className="border-2 border-dashed border-[#cbd5e1] hover:border-[#93c5fd] rounded-xl p-8 sm:p-10 flex flex-col items-center justify-center text-center bg-[#f8fafc] hover:bg-[#eff6ff]/40 cursor-pointer transition-all"
               >
-                <div style={{ width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", color: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>add</span>
+                <div className="w-11 h-11 rounded-full bg-[#eff6ff] border border-[#bfdbfe] text-[#2563eb] flex items-center justify-center mb-3 shadow-xs">
+                  <span className="material-symbols-outlined text-2xl font-light">add</span>
                 </div>
-                <div style={{ fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>Upload new module</div>
-                <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px" }}>Add video lessons, materials and resources</div>
+                <div className="text-sm sm:text-base font-bold text-[#0f172a]">Upload new module</div>
+                <div className="text-xs text-[#64748b] mt-1">Add video lessons, materials and resources</div>
               </div>
 
               {/* Render Course Modules if any exist */}
               {coursesLoaded && courses.length > 0 && (
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginTop: "20px" }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 mt-5">
                   {displayedCourses.map((mod) => (
-                    <div key={mod.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <div key={mod.id} className="bg-white border border-[#e2e8f0] rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
                       <div>
-                        <div style={{ height: "140px", borderRadius: "10px", overflow: "hidden", marginBottom: "12px", backgroundColor: "#e2e8f0" }}>
-                          <img
-                            src={mod.img || "/images/brochure_page24_img1.jpeg"}
-                            alt={mod.title}
-                            onError={(e) => {
-                              e.currentTarget.onerror = null;
-                              e.currentTarget.src = "/images/brochure_page24_img1.jpeg";
-                            }}
-                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                          />
+                        <div className="h-36 sm:h-40 rounded-lg overflow-hidden mb-3 bg-slate-100 border border-slate-200">
+                          <ModuleThumbnail src={mod.img} alt={mod.title} />
                         </div>
-                        <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", margin: 0 }}>{mod.title}</h4>
-                        <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", display: "flex", alignItems: "center", gap: "6px" }}>
-                          <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>video_library</span>
+                        <h4 className="text-sm font-bold text-[#0f172a] m-0 line-clamp-1">{mod.title}</h4>
+                        <div className="text-xs text-[#64748b] mt-1.5 flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-sm text-[#94a3b8]">video_library</span>
                           {mod.sessions?.length || 0} Lessons
                         </div>
                       </div>
-                      <div style={{ display: "flex", gap: "10px", marginTop: "16px", paddingTop: "12px", borderTop: "1px solid #e2e8f0" }}>
-                        <button onClick={() => openEditModal(mod)} style={{ flex: 1, backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#475569", borderRadius: "8px", padding: "8px 0", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}>
+                      <div className="flex gap-2.5 mt-4 pt-3 border-t border-[#f1f5f9]">
+                        <button
+                          onClick={() => openEditModal(mod)}
+                          className="flex-1 bg-white border border-[#cbd5e1] hover:bg-slate-50 text-[#475569] font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
+                        >
                           Edit
                         </button>
-                        <button onClick={() => handleDelete(mod.id, mod.title)} style={{ flex: 1, backgroundColor: "#fef2f2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: "8px", padding: "8px 0", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}>
+                        <button
+                          onClick={() => handleDelete(mod.id, mod.title)}
+                          className="flex-1 bg-white border border-[#fecaca] hover:bg-red-50 text-[#dc2626] font-bold rounded-lg py-2 text-xs transition-colors cursor-pointer"
+                        >
                           Delete
                         </button>
                       </div>
@@ -594,46 +624,30 @@ export default function AdminHubPage() {
 
           {/* Middle Card 2: ASSIGNMENTS & DELIVERABLES */}
           <motion.section initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}>
-            <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-                <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
+            <div className="bg-white border border-[#e2e8f0] rounded-2xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                   ASSIGNMENTS & DELIVERABLES
                 </h2>
               </div>
 
               {assignmentsLoaded && assignments.length === 0 ? (
-                <div style={{ padding: "40px 20px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-                  <div style={{ position: "relative", marginBottom: "12px" }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: "42px", color: "#94a3b8" }}>content_copy</span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: "absolute", top: "-6px", right: "-6px" }}>
-                      <path d="M12 2L12 6M2 12L6 12M18 12L22 12" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
-                    </svg>
+                <div className="py-10 px-4 flex flex-col items-center justify-center text-center">
+                  <div className="relative mb-3">
+                    <span className="material-symbols-outlined text-4xl text-[#94a3b8]">content_copy</span>
                   </div>
-                  <div style={{ fontSize: "15px", fontWeight: 700, color: "#0f172a" }}>No assignments published yet.</div>
-                  <div style={{ fontSize: "12px", color: "#64748b", marginTop: "4px", marginBottom: "20px" }}>Click "Publish Work" to assign tasks to scholars.</div>
+                  <div className="text-sm sm:text-base font-bold text-[#0f172a]">No assignments published yet.</div>
+                  <div className="text-xs text-[#64748b] mt-1 mb-5">Click "Publish Work" to assign tasks to scholars.</div>
                   <button
                     onClick={openAssignModal}
-                    style={{
-                      backgroundColor: "#2563eb",
-                      color: "#ffffff",
-                      fontWeight: 700,
-                      padding: "10px 24px",
-                      borderRadius: "9999px",
-                      border: "none",
-                      fontSize: "13px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      cursor: "pointer",
-                      boxShadow: "0 4px 15px rgba(37, 99, 235, 0.25)"
-                    }}
+                    className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-full text-xs flex items-center gap-1.5 shadow-md shadow-blue-500/20 transition-all cursor-pointer border-0"
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>add</span>
+                    <span className="material-symbols-outlined text-base">add</span>
                     Publish Work
                   </button>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div className="flex flex-col gap-4">
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     <button
                       onClick={openAssignModal}
