@@ -29,10 +29,8 @@ const getEmbedUrl = (input: string) => {
 
 // ── Sidebar ──────────────────────────────────────────────────────────────────
 const studentNavLinks = [
-  { icon: "dashboard", label: "Dashboard", tab: -1 },
   { icon: "play_circle", label: "My Learning", tab: 0 },
   { icon: "menu_book", label: "Course Library", tab: 1 },
-  { icon: "workspace_premium", label: "Certificates", tab: 2 },
   { icon: "forum", label: "Q&A Forum", tab: 3 },
 ];
 
@@ -131,7 +129,7 @@ function StudentSidebar({
           <div style={{ position: "absolute", bottom: "-15px", right: "10px", width: "40px", height: "40px", backgroundColor: "rgba(255,255,255,0.06)", borderRadius: "50%" }} />
           <span className="material-symbols-outlined" style={{ fontSize: "22px", color: "rgba(255,255,255,0.8)", marginBottom: "8px", display: "block" }}>emoji_events</span>
           <div style={{ fontSize: "12px", fontWeight: 800, color: "#ffffff", lineHeight: 1.3, marginBottom: "4px" }}>Keep Learning<br />Keep Growing</div>
-          <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4, marginBottom: "12px" }}>Complete your courses and earn certificates</div>
+          <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4, marginBottom: "12px" }}>Complete your courses and track your progress</div>
           <button
             onClick={() => {
               setActiveTab(0);
@@ -902,20 +900,6 @@ export default function StudentDashboardPage() {
             </motion.div>
           )}
 
-          {/* ══ TAB 2: CERTIFICATES (placeholder) ══ */}
-          {activeTab === 2 && (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
-              style={{ textAlign: "center", padding: "80px 20px" }}>
-              <span className="material-symbols-outlined" style={{ fontSize: "64px", color: "#cbd5e1", display: "block", marginBottom: "16px" }}>workspace_premium</span>
-              <h2 style={{ fontSize: "18px", fontWeight: 800, color: "#0f172a", marginBottom: "8px" }}>Certificates</h2>
-              <p style={{ fontSize: "14px", color: "#94a3b8" }}>Complete your courses to earn certificates of completion.</p>
-              <button onClick={() => setActiveTab(1)} style={{
-                marginTop: "20px", backgroundColor: "#2563eb", color: "#ffffff", border: "none",
-                borderRadius: "10px", padding: "12px 24px", fontSize: "13px", fontWeight: 700,
-                cursor: "pointer"
-              }}>Explore Courses</button>
-            </motion.div>
-          )}
 
           {/* ══ TAB 3: Q&A FORUM (standalone) ══ */}
           {activeTab === 3 && (
