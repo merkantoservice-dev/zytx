@@ -19,7 +19,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <section style={{ padding: '6rem 4rem' }}>
+      <section className={styles.sectionPad}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -27,7 +27,7 @@ export default function AboutPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>01</span>
             </div>
-            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Built for opportunity.</h2>
+            <h2 className={styles.responsiveHeadingLg}>Built for opportunity.</h2>
           </div>
           <div style={{ paddingTop: '1rem' }}>
             <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
@@ -40,7 +40,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section style={{ padding: '6rem 4rem', backgroundColor: 'var(--gray-light)' }}>
+      <section className={styles.sectionPad} style={{ backgroundColor: 'var(--gray-light)' }}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -48,7 +48,7 @@ export default function AboutPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>02</span>
             </div>
-            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Growth with direction.</h2>
+            <h2 className={styles.responsiveHeadingLg}>Growth with direction.</h2>
           </div>
           <div style={{ paddingTop: '1rem' }}>
             <p style={{ fontSize: '1.25rem', lineHeight: 1.6, marginBottom: '2rem', fontWeight: 500, color: 'var(--navy)' }}>
@@ -64,14 +64,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section style={{ padding: '8rem 4rem' }}>
+      <section className={styles.sectionPadLg}>
         <div className={styles.sectionHeaderLineBlock}>
           <span className={styles.sectionLabel}>WHAT DRIVES US</span>
           <div className={styles.line}></div>
           <span className={styles.sectionNumber}>03</span>
         </div>
         
-        <div className={styles.grid4} style={{ marginTop: '4rem' }}>
+        <div className={styles.grid4} style={{ marginTop: '3rem' }}>
           <div className={styles.valueCard}>
             <h3>Clarity</h3>
             <p>Understand the opportunity before acting.</p>

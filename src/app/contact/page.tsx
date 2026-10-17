@@ -20,17 +20,17 @@ export default function ContactPage() {
         </p>
       </div>
       
-      <section style={{ padding: '8rem 4rem' }}>
+      <section className={styles.sectionPadLg}>
         <div className={styles.grid2}>
           
           <div>
-            <h3 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '3rem', letterSpacing: '-1px' }}>Start a Conversation</h3>
+            <h3 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '2.5rem', letterSpacing: '-1px' }}>Start a Conversation</h3>
             <form className={styles.contactForm}>
               <div className={styles.formGroup}>
                 <label>Name</label>
                 <input type="text" className={styles.formInput} placeholder="Your full name" />
               </div>
-              <div className={styles.grid2} style={{ gap: '2rem' }}>
+              <div className={styles.grid2} style={{ gap: '1.5rem' }}>
                 <div className={styles.formGroup}>
                   <label>Email</label>
                   <input type="email" className={styles.formInput} placeholder="name@company.com" />
@@ -45,8 +45,8 @@ export default function ContactPage() {
                 <input type="text" className={styles.formInput} placeholder="Your company name" />
               </div>
               
-              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
-                <label style={{ marginBottom: '1rem' }}>I'm interested in &darr;</label>
+              <div className={styles.formGroup} style={{ marginTop: '0.5rem' }}>
+                <label style={{ marginBottom: '0.75rem' }}>I'm interested in &darr;</label>
                 <div className={styles.formRadioGroup}>
                   <label className={styles.formRadioLabel}>
                     <input type="radio" name="interest" value="business_development" /> Business Development
@@ -66,12 +66,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+              <div className={styles.formGroup} style={{ marginTop: '0.5rem' }}>
                 <label>Message</label>
                 <textarea className={styles.formTextarea} placeholder="How can we help you achieve your goals?"></textarea>
               </div>
 
-              <button type="button" className={styles.btnPrimaryDark} style={{ width: 'fit-content', backgroundColor: 'var(--navy)', color: 'white', marginTop: '2rem' }}>
+              <button type="button" className={styles.btnPrimaryDark} style={{ width: 'fit-content', backgroundColor: 'var(--navy)', color: 'white', marginTop: '1.5rem' }}>
                 Send Enquiry
                 <ArrowIcon />
               </button>

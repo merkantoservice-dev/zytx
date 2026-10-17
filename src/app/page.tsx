@@ -107,7 +107,7 @@ export default function Home() {
             <div className={styles.line}></div>
             <span className={`${styles.sectionNumber} ${styles.sectionNumberDark}`}>02</span>
           </div>
-          <h2 style={{ fontSize: '3.5rem', marginBottom: '4rem', fontWeight: 800, letterSpacing: '-1px' }}>Built to move businesses forward.</h2>
+          <h2 className={styles.responsiveHeadingLg} style={{ marginBottom: '3.5rem' }}>Built to move businesses forward.</h2>
           
           <div className={styles.servicesList}>
             <div className={styles.serviceItem}>
@@ -177,7 +177,7 @@ export default function Home() {
         </section>
 
         {/* COURSES PREVIEW SECTION */}
-        <section style={{ padding: '8rem 4rem', backgroundColor: 'var(--gray-light)' }}>
+        <section className={styles.sectionPadLg} style={{ backgroundColor: 'var(--gray-light)' }}>
           <div className={styles.sectionHeaderLineBlock}>
             <span className={styles.sectionLabel}>ZYT X COURSES</span>
             <div className={styles.line}></div>
@@ -185,7 +185,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }}>
             <div style={{ maxWidth: '600px' }}>
-              <h2 style={{ fontSize: '4rem', fontWeight: 800, color: 'var(--navy)', lineHeight: 1.1, letterSpacing: '-1px', marginBottom: '1.5rem' }}>
+              <h2 className={styles.responsiveHeadingXl} style={{ marginBottom: '1.5rem' }}>
                 Knowledge built<br/>for growth.
               </h2>
               <p style={{ fontSize: '1.125rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>

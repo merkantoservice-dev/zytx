@@ -326,7 +326,7 @@ export default function CourseDemoSection() {
     <section
       id="demo"
       style={{
-        padding: "6rem 4rem",
+        padding: "clamp(3.5rem, 6vw, 6rem) clamp(1.25rem, 4vw, 4rem)",
         backgroundColor: "#ffffff",
         borderTop: "1px solid #e2e8f0",
         borderBottom: "1px solid #e2e8f0",
@@ -363,7 +363,7 @@ export default function CourseDemoSection() {
           >
             INTERACTIVE COURSE DEMO
           </span>
-          <h2 style={{ fontSize: "3rem", fontWeight: 800, color: "#0f172a", letterSpacing: "-1px", lineHeight: 1.15, marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "clamp(1.85rem, 5vw, 3rem)", fontWeight: 800, color: "#0f172a", letterSpacing: "-1px", lineHeight: 1.15, marginBottom: "1rem" }}>
             Preview our masterclass before you enroll.
           </h2>
           <p style={{ fontSize: "1.125rem", color: "#64748b", lineHeight: 1.6, margin: 0 }}>
@@ -388,7 +388,7 @@ export default function CourseDemoSection() {
                   backgroundColor: "#ffffff",
                   border: "1px solid #e2e8f0",
                   borderTop: "3px solid #2563eb",
-                  padding: "38px 34px",
+                  padding: "36px clamp(18px, 5vw, 34px)",
                   position: "relative",
                   boxShadow: "0 20px 45px rgba(15, 23, 42, 0.08)",
                   borderRadius: "8px"
@@ -678,7 +678,8 @@ export default function CourseDemoSection() {
                       backgroundColor: "#f1f5f9",
                       padding: "4px",
                       border: "1px solid #e2e8f0",
-                      borderRadius: "6px"
+                      borderRadius: "6px",
+                      flexWrap: "wrap"
                     }}
                   >
                     <button

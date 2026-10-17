@@ -178,6 +178,7 @@
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 
 .btnPrimary:hover {
@@ -193,6 +194,7 @@
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 
 .btnGhost:hover {
@@ -594,6 +596,7 @@
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 .btnWhite:hover {
   background-color: var(--gray-light);
@@ -610,6 +613,35 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+}
+
+/* Reusable responsive padding classes for page sections */
+.sectionPad {
+  padding: 6rem 4rem;
+}
+
+.sectionPadLg {
+  padding: 8rem 4rem;
+}
+
+.sectionPadSm {
+  padding: 4rem 4rem 6rem;
+}
+
+.responsiveHeadingLg {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.responsiveHeadingXl {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--navy);
+  line-height: 1.1;
 }
 
 .valueCard {
@@ -741,6 +773,7 @@
   font-size: 1rem;
   background-color: var(--gray-light);
   transition: border-color 0.2s;
+  width: 100%;
 }
 .formInput:focus, .formSelect:focus, .formTextarea:focus {
   outline: none;
@@ -802,8 +835,358 @@
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 .btnPrimaryDark:hover {
   background-color: var(--gray-light);
   transform: translateY(-2px);
+}
+
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES (TABLETS & MOBILE)
+   Desktop layout is 100% preserved; mobile scales smoothly
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .pageHeader {
+    padding: 10rem 2.5rem 4rem;
+  }
+  .hero {
+    padding: 0 2.5rem;
+  }
+  .heroContent {
+    margin-left: 2rem;
+  }
+  .heroTitle {
+    font-size: 5.5rem;
+  }
+  .about {
+    padding: 6rem 2.5rem;
+  }
+  .aboutContent {
+    gap: 3rem;
+  }
+  .services {
+    padding: 5rem 2.5rem;
+  }
+  .serviceItem {
+    grid-template-columns: 80px 1fr 280px 50px;
+  }
+  .impact {
+    padding: 6rem 2.5rem 3rem;
+  }
+  .approach {
+    padding: 3rem 2.5rem 6rem;
+  }
+  .cta {
+    padding: 6rem 2.5rem;
+  }
+  .sectionPad {
+    padding: 5rem 2.5rem;
+  }
+  .sectionPadLg {
+    padding: 6rem 2.5rem;
+  }
+  .sectionPadSm {
+    padding: 3rem 2.5rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    padding: 7rem 1.25rem 3rem;
+  }
+  .pageHeaderTitle {
+    font-size: clamp(2.25rem, 8vw, 3.25rem);
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .pageHeaderSubtitle {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .sectionHeaderLineBlock {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Hero Mobile */
+  .hero {
+    padding: 0 1.25rem;
+    min-height: 92vh;
+    align-items: center;
+  }
+  .heroContent {
+    margin-left: 0;
+    padding-top: 100px;
+    padding-bottom: 70px;
+    max-width: 100%;
+  }
+  .heroTitle {
+    font-size: clamp(3rem, 11vw, 4.5rem);
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+  }
+  .heroText {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  .heroButtons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+    width: 100%;
+  }
+  .btnPrimary,
+  .btnGhost {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    padding: 0.875rem 1.5rem;
+  }
+  .heroTags {
+    display: none;
+  }
+  .scrollIndicator {
+    display: none;
+  }
+
+  /* About Mobile */
+  .about {
+    padding: 4rem 1.25rem;
+  }
+  .aboutContent {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .aboutText h2 {
+    font-size: clamp(2.1rem, 7.5vw, 2.75rem);
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+  }
+  .aboutText p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .aboutImageWrapper {
+    height: 280px;
+    border-radius: 12px;
+  }
+  .aboutTags {
+    position: static;
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 0.65rem;
+  }
+
+  /* Services Mobile */
+  .services {
+    padding: 4rem 1.25rem;
+  }
+  .serviceItem {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0;
+    min-height: auto;
+  }
+  .serviceNumber {
+    font-size: 2.25rem;
+    line-height: 1;
+  }
+  .serviceText {
+    padding-right: 0;
+  }
+  .serviceText h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.35rem;
+  }
+  .serviceText p {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+  .serviceImageWrapper {
+    width: 100%;
+    height: 200px;
+    clip-path: none;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+  }
+  .serviceArrow {
+    align-self: flex-start;
+    justify-content: flex-start;
+    margin-top: 0.25rem;
+  }
+
+  /* Impact Mobile */
+  .impact {
+    padding: 4rem 1.25rem 2.5rem;
+  }
+  .impactTop {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .impactTop h2 {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+    letter-spacing: -1px;
+  }
+  .impactTop p {
+    font-size: 1rem;
+  }
+  .impactStats {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .statItem {
+    padding-left: 1rem;
+  }
+  .statNumber {
+    font-size: 2.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Approach Mobile */
+  .approach {
+    padding: 3rem 1.25rem 4rem;
+  }
+  .approachContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .approachImageWrapper {
+    height: 280px;
+    order: -1;
+  }
+  .approachText h2 {
+    font-size: clamp(2.1rem, 7vw, 2.75rem);
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+  }
+  .approachText p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* CTA Mobile */
+  .cta {
+    padding: 4rem 1.25rem;
+  }
+  .ctaContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .cta h2 {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+    letter-spacing: -1px;
+  }
+  .ctaRight {
+    margin-left: 0;
+    max-width: 100%;
+  }
+  .ctaRight p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Shared Grid and Utilities Mobile */
+  .grid2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .grid4 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .sectionPad {
+    padding: 3.5rem 1.25rem;
+  }
+  .sectionPadLg {
+    padding: 4.5rem 1.25rem;
+  }
+  .sectionPadSm {
+    padding: 2.5rem 1.25rem 3.5rem;
+  }
+  .responsiveHeadingLg {
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    letter-spacing: -1px;
+  }
+  .responsiveHeadingXl {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+    letter-spacing: -1px;
+  }
+
+  /* Course Item Mobile */
+  .courseItem {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 2.5rem 0;
+  }
+  .courseTitle {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .courseDesc {
+    font-size: 1rem;
+  }
+
+  /* Approach Step Mobile */
+  .approachStep {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 2rem 0;
+  }
+  .approachStepTitle {
+    font-size: 1.75rem;
+  }
+  .approachStepText {
+    font-size: 1.05rem;
+  }
+
+  /* Dark Banner Mobile */
+  .darkBanner {
+    padding: 4rem 1.25rem;
+  }
+  .darkBanner h2 {
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    letter-spacing: -0.5px;
+  }
+  .darkBanner p {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Contact Details & Form Mobile */
+  .contactDetails {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--gray-border);
+    padding-top: 2.5rem;
+    margin-top: 1.5rem;
+  }
+  .detailBlock p,
+  .detailBlock a {
+    font-size: 1.1rem;
+  }
+  .formRadioGroup {
+    gap: 0.5rem;
+  }
+  .formRadioLabel {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .impactStats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }

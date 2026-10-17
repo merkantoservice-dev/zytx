@@ -99,3 +99,33 @@
   text-transform: uppercase;
   margin-top: 3rem;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3.5rem 1.25rem 2.5rem;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .col1 {
+    gap: 1rem;
+  }
+
+  .col2 {
+    padding-left: 0;
+  }
+
+  .col3 {
+    padding-left: 0;
+    gap: 1.5rem;
+  }
+
+  .footerTagline {
+    text-align: left;
+    margin-top: 1.5rem;
+  }
+}

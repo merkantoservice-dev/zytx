@@ -53,7 +53,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      <section style={{ padding: '6rem 4rem' }}>
+      <section className={styles.sectionPad}>
         <div className={styles.grid2}>
           <div>
             <div className={styles.sectionHeaderLineBlock}>
@@ -61,7 +61,7 @@ export default function CoursesPage() {
               <div className={styles.line}></div>
               <span className={styles.sectionNumber}>01</span>
             </div>
-            <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-1px' }}>Knowledge is another form of leverage.</h2>
+            <h2 className={styles.responsiveHeadingLg}>Knowledge is another form of leverage.</h2>
           </div>
           <div style={{ paddingTop: '1rem' }}>
             <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
@@ -71,7 +71,7 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      <section id="courses-list" style={{ padding: '4rem 4rem 6rem' }}>
+      <section id="courses-list" className={styles.sectionPadSm}>
         <div className={styles.courseItem}>
           <div className={styles.approachStepNumber}>01</div>
           <div>
@@ -167,7 +167,7 @@ export default function CoursesPage() {
       <CourseDemoSection />
 
       <div className={styles.darkBanner}>
-        <h2 style={{ fontSize: '3rem', marginBottom: '4rem' }}>LEARN.<br/>APPLY.<br/>GROW.</h2>
+        <h2 className={styles.responsiveHeadingLg} style={{ color: 'white', marginBottom: '2.5rem' }}>LEARN.<br/>APPLY.<br/>GROW.</h2>
         <p style={{ fontSize: '1.25rem', fontWeight: 600, color: 'white', marginBottom: '1rem' }}>Not sure where to start?</p>
         <p style={{ marginBottom: '2rem' }}>Talk to our team and find the course that fits your goals.</p>
         <Link href="/contact" className={styles.btnWhite}>

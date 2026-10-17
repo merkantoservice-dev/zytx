@@ -298,18 +298,27 @@
 
 @media (max-width: 640px) {
   .pageHeader {
-    padding: 7rem 1.5rem 2rem;
+    padding: 7rem 1.25rem 2rem;
   }
   .servicesSection {
-    padding: 1rem 1.5rem 4rem;
+    padding: 1rem 1.25rem 4rem;
   }
   .serviceCard {
-    padding: 1.75rem;
+    padding: 1.5rem 1.25rem;
   }
   .serviceTitle {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
   }
   .serviceVisual {
     height: 220px;
   }
+  .bottomBanner {
+    padding: 4rem 1.25rem;
+  }
+  .bottomBannerBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
 }
+
