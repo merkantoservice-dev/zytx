@@ -118,29 +118,18 @@ export default function AdminQAPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          padding: "20px 32px",
-          borderBottom: "1px solid #e2e8f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-        }}>
-          <div>
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+        <header className="dashboard-header">
+          <div className="dashboard-header-title">
+            <h1>
               Q&A COMMAND CENTER
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+            <div className="dashboard-header-subtitle">
               Global Student Inquiries <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Course Forum Support
             </div>
           </div>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="dashboard-content" style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
           {/* Course Filter Selector */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span style={{ fontSize: "12px", fontWeight: 700, color: "#64748b", textTransform: "uppercase" }}>Filter Course:</span>

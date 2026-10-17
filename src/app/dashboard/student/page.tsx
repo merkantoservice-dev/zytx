@@ -48,6 +48,8 @@ function StudentSidebar({
   initials: string;
 }) {
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const handleSignOut = async () => {
     localStorage.removeItem("merkanto_role");
     localStorage.removeItem("merkanto_user");
@@ -68,12 +70,8 @@ function StudentSidebar({
     router.push("/");
   };
 
-  return (
-    <aside style={{
-      width: "220px", minWidth: "220px", height: "100vh", backgroundColor: "#ffffff",
-      borderRight: "1px solid #e2e8f0", position: "sticky", top: 0, display: "flex",
-      flexDirection: "column", flexShrink: 0, overflowY: "auto"
-    }}>
+  const SidebarContent = () => (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", backgroundColor: "#ffffff" }}>
       {/* Logo */}
       <div style={{ padding: "24px 20px 18px" }}>
         <button
@@ -100,7 +98,10 @@ function StudentSidebar({
           return (
             <button
               key={link.label}
-              onClick={() => link.tab >= 0 && setActiveTab(link.tab)}
+              onClick={() => {
+                if (link.tab >= 0) setActiveTab(link.tab);
+                setMobileOpen(false);
+              }}
               style={{
                 display: "flex", alignItems: "center", gap: "12px", padding: "11px 14px",
                 borderRadius: "10px", fontSize: "13.5px", fontWeight: isActive ? 700 : 500,
@@ -132,7 +133,10 @@ function StudentSidebar({
           <div style={{ fontSize: "12px", fontWeight: 800, color: "#ffffff", lineHeight: 1.3, marginBottom: "4px" }}>Keep Learning<br />Keep Growing</div>
           <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4, marginBottom: "12px" }}>Complete your courses and earn certificates</div>
           <button
-            onClick={() => setActiveTab(0)}
+            onClick={() => {
+              setActiveTab(0);
+              setMobileOpen(false);
+            }}
             style={{
               backgroundColor: "#ffffff", color: "#2563eb", fontWeight: 700, fontSize: "10px",
               border: "none", borderRadius: "6px", padding: "6px 12px", cursor: "pointer",
@@ -200,7 +204,72 @@ function StudentSidebar({
           Logout
         </button>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile toggle button */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="md:hidden fixed z-50 bg-white border border-[#e2e8f0] rounded-xl text-[#0f172a] shadow-sm flex items-center justify-center"
+        style={{ top: "14px", left: "14px", width: "38px", height: "38px", cursor: "pointer" }}
+        aria-label="Open navigation"
+      >
+        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>menu</span>
+      </button>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm"
+              style={{ zIndex: 90 }}
+            />
+            <motion.aside
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 250 }}
+              className="md:hidden fixed left-0 top-0 h-full overflow-hidden shadow-2xl"
+              style={{ width: "260px", background: "#ffffff", borderRight: "1px solid #e2e8f0", zIndex: 100 }}
+            >
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{ position: "absolute", top: "16px", right: "16px", color: "#64748b", background: "none", border: "none", cursor: "pointer", zIndex: 10 }}
+                aria-label="Close menu"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>close</span>
+              </button>
+              <SidebarContent />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop sidebar */}
+      <aside
+        className="hidden md:block"
+        style={{
+          width: "220px",
+          minWidth: "220px",
+          height: "100vh",
+          backgroundColor: "#ffffff",
+          borderRight: "1px solid #e2e8f0",
+          position: "sticky",
+          top: 0,
+          flexShrink: 0,
+          overflowY: "auto"
+        }}
+      >
+        <SidebarContent />
+      </aside>
+    </>
   );
 }
 
@@ -373,23 +442,23 @@ export default function StudentDashboardPage() {
         <header style={{
           position: "sticky", top: 0, zIndex: 40,
           backgroundColor: "rgba(255,255,255,0.97)", backdropFilter: "blur(10px)",
-          borderBottom: "1px solid #e2e8f0", padding: "0 32px"
+          borderBottom: "1px solid #e2e8f0"
         }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
+          <div className="dashboard-header" style={{ borderBottom: "none", backgroundColor: "transparent", backdropFilter: "none" }}>
             {/* Left: Title */}
-            <div>
+            <div className="dashboard-header-title">
               <h1 style={{ fontSize: "17px", fontWeight: 900, color: "#0f172a", margin: 0, letterSpacing: "0.02em" }}>
                 ACADEMY DASHBOARD
               </h1>
-              <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 500, marginTop: "2px" }}>
+              <div className="dashboard-header-subtitle" style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 500, marginTop: "2px" }}>
                 Student Portal&nbsp;
                 <span style={{ color: "#cbd5e1" }}>/</span>
                 &nbsp;Learning Center
               </div>
             </div>
 
-            {/* Center: Search Bar */}
-            <div style={{ flex: 1, maxWidth: "360px", margin: "0 32px", position: "relative" }}>
+            {/* Center: Search Bar (Desktop only) */}
+            <div className="hidden md:block" style={{ flex: 1, maxWidth: "360px", margin: "0 24px", position: "relative" }}>
               <span className="material-symbols-outlined" style={{
                 position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)",
                 fontSize: "17px", color: "#94a3b8", pointerEvents: "none"
@@ -408,7 +477,7 @@ export default function StudentDashboardPage() {
             </div>
 
             {/* Right: Notif + Avatar */}
-            <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+            <div className="dashboard-header-actions">
               {/* Notification bell */}
               <div style={{ position: "relative" }}>
                 <button onClick={() => setNotifOpen(!notifOpen)} style={{
@@ -465,11 +534,7 @@ export default function StudentDashboardPage() {
                   }}>
                     {initialLetters}
                   </div>
-                  <div style={{ textAlign: "left", display: "none" as any }}>
-                    <div style={{ fontSize: "13px", fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }}>{currentStudent.name.split(" ")[0]}</div>
-                    <div style={{ fontSize: "10px", color: "#94a3b8" }}>Student</div>
-                  </div>
-                  <div style={{ textAlign: "left" }}>
+                  <div className="header-user-name" style={{ textAlign: "left" }}>
                     <div style={{ fontSize: "13px", fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }}>{currentStudent.name.split(" ")[0]}</div>
                     <div style={{ fontSize: "10px", color: "#94a3b8" }}>Student</div>
                   </div>
@@ -532,7 +597,7 @@ export default function StudentDashboardPage() {
           </div>
 
           {/* Tabs */}
-          <div style={{ display: "flex", gap: "0px", borderTop: "1px solid #f1f5f9" }}>
+          <div style={{ display: "flex", gap: "0px", borderTop: "1px solid #f1f5f9", overflowX: "auto" }}>
             {["My Learning", "Course Library"].map((tab, i) => (
               <button key={tab} onClick={() => setActiveTab(i)} style={{
                 padding: "14px 20px", fontSize: "13px",
@@ -540,7 +605,8 @@ export default function StudentDashboardPage() {
                 color: activeTab === i ? "#2563eb" : "#94a3b8",
                 background: "none", border: "none",
                 borderBottom: activeTab === i ? "2px solid #2563eb" : "2px solid transparent",
-                cursor: "pointer", transition: "all 0.2s ease", fontFamily: "Outfit, sans-serif"
+                cursor: "pointer", transition: "all 0.2s ease", fontFamily: "Outfit, sans-serif",
+                whiteSpace: "nowrap"
               }}>
                 {tab}
               </button>
@@ -549,7 +615,7 @@ export default function StudentDashboardPage() {
         </header>
 
         {/* ── Body ── */}
-        <div style={{ padding: "28px 32px", maxWidth: "1300px", margin: "0 auto" }}>
+        <div className="dashboard-content" style={{ maxWidth: "1300px", margin: "0 auto" }}>
 
           {/* ══ TAB 0: MY LEARNING ══ */}
           {activeTab === 0 && (
@@ -557,7 +623,7 @@ export default function StudentDashboardPage() {
               style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
 
               {/* Hero Row: Resume Watching + Newest Module */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: "20px" }}>
+              <div className="dashboard-split-grid">
 
                 {/* Left: Resume Watching */}
                 <div style={{
@@ -577,7 +643,7 @@ export default function StudentDashboardPage() {
                     </span>
                   </div>
 
-                  <div style={{ display: "flex", gap: "20px", flex: 1 }}>
+                  <div style={{ display: "flex", gap: "20px", flex: 1, flexWrap: "wrap" }}>
                     <div style={{ flex: 1 }}>
                       {lastWatchedCourse && (
                         <div style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>
@@ -908,10 +974,7 @@ export default function StudentDashboardPage() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 150, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(15,23,42,0.55)", backdropFilter: "blur(6px)", overflowY: "auto" }}>
             <motion.div initial={{ scale: 0.96, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.96, y: 20 }}
-              style={{
-                backgroundColor: "#ffffff", borderRadius: "20px", width: "100%", maxWidth: "820px",
-                display: "flex", overflow: "hidden", boxShadow: "0 30px 60px rgba(0,0,0,0.22)", position: "relative"
-              }}>
+              className="course-detail-modal-inner">
 
               {/* Close */}
               <button onClick={() => setSelectedCourseDetail(null)} style={{
@@ -924,7 +987,7 @@ export default function StudentDashboardPage() {
               </button>
 
               {/* Left: Image + Description */}
-              <div style={{ width: "300px", flexShrink: 0, display: "flex", flexDirection: "column" }}>
+              <div className="course-detail-modal-sidebar">
                 <div style={{ padding: "28px 24px 20px" }}>
                   <div style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "8px" }}>
                     COURSE MODULES
@@ -1030,6 +1093,7 @@ export default function StudentDashboardPage() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 160, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(15,23,42,0.55)", backdropFilter: "blur(4px)" }}>
             <motion.div initial={{ scale: 0.96, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.96, y: 20 }}
+              className="modal-responsive"
               style={{ backgroundColor: "#ffffff", borderRadius: "16px", width: "100%", maxWidth: "500px", padding: "28px", position: "relative", boxShadow: "0 24px 48px rgba(0,0,0,0.15)" }}>
               <button onClick={() => setSubmittingAssignmentId(null)} style={{ position: "absolute", top: "16px", right: "16px", color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
                 <span className="material-symbols-outlined">close</span>
@@ -1063,11 +1127,7 @@ export default function StudentDashboardPage() {
         {playingUrl && activeSession && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 180, display: "flex", alignItems: "center", justifyContent: "center", padding: "12px", backgroundColor: "rgba(15,23,42,0.6)", backdropFilter: "blur(6px)" }}>
-            <div style={{
-              position: "relative", width: "100%", maxWidth: "1200px", height: "88vh",
-              backgroundColor: "#f8fafc", borderRadius: "18px", display: "flex",
-              flexDirection: "row", overflow: "hidden", boxShadow: "0 32px 64px rgba(0,0,0,0.3)"
-            }}>
+            <div className="student-video-modal-inner">
               {/* Left: Video Area */}
               <div style={{ flex: 1, backgroundColor: "#ffffff", display: "flex", flexDirection: "column" }}>
                 {/* Breadcrumb header */}
@@ -1142,7 +1202,7 @@ export default function StudentDashboardPage() {
               </div>
 
               {/* Right: Notes + Q&A */}
-              <div style={{ width: "340px", borderLeft: "1px solid #e2e8f0", display: "flex", flexDirection: "column", backgroundColor: "#ffffff" }}>
+              <div className="student-video-sidebar">
                 {/* Tab Switcher */}
                 <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0" }}>
                   {[

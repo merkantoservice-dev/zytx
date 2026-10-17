@@ -353,27 +353,16 @@ export default function AdminHubPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          padding: "20px 32px",
-          borderBottom: "1px solid #e2e8f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-        }}>
+        <header className="dashboard-header">
           <div>
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+            <h1 className="dashboard-header-title">
               ADMINISTRATION PORTAL
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+            <div className="dashboard-header-subtitle">
               System Overview <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Command Center
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginLeft: "auto" }}>
+          <div className="dashboard-header-actions">
             <button
               onClick={async () => {
                 localStorage.removeItem("merkanto_role");
@@ -410,24 +399,27 @@ export default function AdminHubPage() {
               title="Return to Main Website (Requires password to re-enter)"
             >
               <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_back</span>
-              Main Website
+              <span className="header-btn-text">Main Website</span>
             </button>
 
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              backgroundColor: "#ffffff",
-              border: "1px solid #e2e8f0",
-              padding: "6px 14px",
-              borderRadius: "12px",
-              cursor: "pointer",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
-            }}>
-              <div style={{ width: "28px", height: "28px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px" }}>
+            <div
+              className="header-user-badge"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                backgroundColor: "#ffffff",
+                border: "1px solid #e2e8f0",
+                padding: "6px 14px",
+                borderRadius: "12px",
+                cursor: "pointer",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
+              }}
+            >
+              <div style={{ width: "28px", height: "28px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", flexShrink: 0 }}>
                 E
               </div>
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>Executive Director</span>
+              <span className="header-user-name" style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>Executive Director</span>
               <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#64748b" }}>
                 expand_more
               </span>
@@ -435,10 +427,10 @@ export default function AdminHubPage() {
           </div>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="dashboard-content">
           {/* Top 4 Stat Cards */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
+            <div className="dashboard-stats-grid">
               {/* Card 1: Active Modules */}
               <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
@@ -717,7 +709,7 @@ export default function AdminHubPage() {
           </motion.section>
 
           {/* Bottom Split Row: Student Registry & Admin Registry */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
+          <div className="dashboard-split-grid">
             {/* Left: Student Registry & Status */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}>
               <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
@@ -734,7 +726,7 @@ export default function AdminHubPage() {
                     </button>
                   </div>
 
-                  <div style={{ overflowX: "auto" }}>
+                  <div className="dashboard-table-container">
                     <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                       <thead>
                         <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
@@ -808,7 +800,7 @@ export default function AdminHubPage() {
                     </button>
                   </div>
 
-                  <div style={{ overflowX: "auto" }}>
+                  <div className="dashboard-table-container">
                     <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                       <thead>
                         <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
@@ -872,7 +864,7 @@ export default function AdminHubPage() {
       <AnimatePresence>
         {isModalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)", overflowY: "auto" }}>
-            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "600px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
+            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} className="modal-responsive" style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "600px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
               <button onClick={() => setIsModalOpen(false)} style={{ position: "absolute", top: "20px", right: "20px", color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -893,11 +885,11 @@ export default function AdminHubPage() {
 
                 <div style={{ padding: "16px", backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
                   <label style={{ fontSize: "11px", fontWeight: 700, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.05em" }}>Course Cover Image</label>
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px", flexWrap: "wrap" }}>
                     <div style={{ width: "80px", height: "55px", backgroundColor: "#e2e8f0", border: "1px solid #cbd5e1", borderRadius: "8px", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {formData.img ? <img src={formData.img} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span className="material-symbols-outlined" style={{ color: "#64748b" }}>image</span>}
                     </div>
-                    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <div style={{ flex: 1, minWidth: "180px", display: "flex", flexDirection: "column", gap: "8px" }}>
                       <input type="text" value={formData.img} onChange={e => setFormData({ ...formData, img: e.target.value })} style={{ width: "100%", backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#0f172a", fontSize: "12px", borderRadius: "6px", padding: "8px", outline: "none" }} placeholder="Paste Cover Image URL" />
                       <label style={{ display: "inline-flex", alignItems: "center", gap: "6px", backgroundColor: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", padding: "6px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "11px", fontWeight: 700, width: "fit-content" }}>
                         {uploadingField === "course-img" ? "Converting..." : "Upload File"}
@@ -921,7 +913,7 @@ export default function AdminHubPage() {
                         <button type="button" onClick={() => handleRemoveSessionField(index)} style={{ position: "absolute", top: "8px", right: "8px", color: "#94a3b8", background: "none", border: "none", cursor: "pointer" }}>
                           <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete</span>
                         </button>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", paddingTop: "4px" }}>
+                        <div className="session-form-grid">
                           <input type="text" required value={session.title} onChange={e => handleSessionChange(index, "title", e.target.value)} style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#0f172a", fontSize: "12px", padding: "8px", borderRadius: "6px", outline: "none" }} placeholder="Lesson Title *" />
                           <input type="text" required value={session.youtubeUrl} onChange={e => handleSessionChange(index, "youtubeUrl", e.target.value)} style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1", color: "#0f172a", fontSize: "12px", padding: "8px", borderRadius: "6px", outline: "none" }} placeholder="Video Embed URL *" />
                         </div>

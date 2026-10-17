@@ -168,30 +168,17 @@ export default function AdminDemoRequestsPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header
-          style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 40,
-            padding: "20px 32px",
-            borderBottom: "1px solid #e2e8f0",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            backdropFilter: "blur(10px)",
-          }}
-        >
-          <div>
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+        <header className="dashboard-header">
+          <div className="dashboard-header-title">
+            <h1>
               DEMO ACCESS & MEDIA CONTROL
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+            <div className="dashboard-header-subtitle">
               Student Access Management <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Course Demo Stream Setup
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="dashboard-header-actions">
             {/* Open Demo Page Link */}
             <a
               href="/demo"
@@ -212,7 +199,7 @@ export default function AdminDemoRequestsPage() {
               }}
             >
               <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>visibility</span>
-              View Live Demo
+              <span className="header-btn-text">View Live Demo</span>
             </a>
 
             {demoRequests.length > 0 && (
@@ -233,16 +220,16 @@ export default function AdminDemoRequestsPage() {
                 }}
               >
                 <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>delete_sweep</span>
-                Clear All
+                <span className="header-btn-text">Clear All</span>
               </button>
             )}
           </div>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="dashboard-content" style={{ display: "flex", flexDirection: "column", gap: "28px", maxWidth: "1400px", margin: "0 auto" }}>
           
           {/* Quick Metrics Bar */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
+          <div className="dashboard-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
             <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "12px", padding: "18px", display: "flex", alignItems: "center", gap: "14px", boxShadow: "0 2px 8px rgba(0,0,0,0.02)" }}>
               <div style={{ width: "42px", height: "42px", borderRadius: "10px", backgroundColor: "#fffbeb", border: "1px solid #fde68a", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <span className="material-symbols-outlined" style={{ color: "#d97706", fontSize: "22px" }}>hourglass_top</span>
@@ -502,7 +489,7 @@ export default function AdminDemoRequestsPage() {
             </div>
 
             {/* Table */}
-            <div style={{ overflowX: "auto" }}>
+            <div className="dashboard-table-container">
               <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                 <thead>
                   <tr style={{ borderBottom: "1px solid #e2e8f0" }}>

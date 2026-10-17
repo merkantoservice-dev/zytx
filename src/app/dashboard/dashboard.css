@@ -5,3 +5,231 @@
   color: var(--foreground);
   min-height: 100vh;
 }
+
+/* Layout shell */
+.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dashboard-main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Sticky Header */
+.dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 18px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  gap: 12px;
+}
+
+.dashboard-header-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.dashboard-header-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 3px;
+}
+
+.dashboard-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Responsive Content Container */
+.dashboard-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Stat Cards Grid */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive Table Wrapper */
+.dashboard-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+/* Split Rows */
+.dashboard-split-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Session Form Grid */
+.session-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+/* Mobile Media Queries (<= 768px) */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 14px 16px 14px 62px !important; /* Perfect clearance for hamburger button at left: 14px */
+  }
+
+  .dashboard-header-title {
+    font-size: 14px !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .dashboard-header-subtitle {
+    font-size: 10px !important;
+  }
+
+  .dashboard-content {
+    padding: 16px 14px !important;
+    gap: 18px !important;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .dashboard-split-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  /* Compact header buttons on mobile */
+  .header-btn-text {
+    display: none !important;
+  }
+
+  .header-user-badge {
+    padding: 4px 8px !important;
+  }
+
+  .header-user-name {
+    display: none !important;
+  }
+
+  .session-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .modal-responsive {
+    padding: 20px 16px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Student Video Modal */
+.student-video-modal-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 88vh;
+  background-color: #f8fafc;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.3);
+}
+
+.student-video-sidebar {
+  width: 340px;
+  border-left: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .student-video-modal-inner {
+    flex-direction: column !important;
+    height: 94vh !important;
+    overflow-y: auto !important;
+  }
+  .student-video-sidebar {
+    width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid #e2e8f0 !important;
+    min-height: 380px !important;
+  }
+}
+
+/* Course Detail Modal */
+.course-detail-modal-inner {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.22);
+  position: relative;
+  max-height: 90vh;
+}
+
+.course-detail-modal-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .course-detail-modal-inner {
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    max-height: 92vh !important;
+  }
+  .course-detail-modal-sidebar {
+    width: 100% !important;
+  }
+}
+
+

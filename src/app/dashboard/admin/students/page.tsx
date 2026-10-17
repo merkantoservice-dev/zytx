@@ -144,51 +144,42 @@ export default function StudentManagementPage() {
 
       <div style={{ flex: 1, height: "100vh", overflowY: "auto" }} className="custom-scrollbar">
         {/* Header */}
-        <header style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          padding: "20px 32px",
-          borderBottom: "1px solid #e2e8f0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-        }}>
-          <div>
-            <h1 style={{ fontSize: "18px", fontWeight: 900, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0, lineHeight: 1 }}>
+        <header className="dashboard-header">
+          <div className="dashboard-header-title">
+            <h1>
               STUDENTS REGISTRY
             </h1>
-            <div style={{ fontSize: "11px", fontWeight: 500, color: "#64748b", marginTop: "4px" }}>
+            <div className="dashboard-header-subtitle">
               Scholar Registry <span style={{ color: "#cbd5e1", margin: "0 4px" }}>/</span> Enrollment Control
             </div>
           </div>
-          <button
-            onClick={openAdd}
-            style={{
-              backgroundColor: "#2563eb",
-              color: "#ffffff",
-              fontWeight: 700,
-              padding: "10px 20px",
-              borderRadius: "8px",
-              border: "none",
-              fontSize: "12px",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              cursor: "pointer",
-              boxShadow: "0 4px 15px rgba(37, 99, 235, 0.25)"
-            }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>person_add</span>
-            Enroll Student
-          </button>
+          <div className="dashboard-header-actions">
+            <button
+              onClick={openAdd}
+              style={{
+                backgroundColor: "#2563eb",
+                color: "#ffffff",
+                fontWeight: 700,
+                padding: "10px 18px",
+                borderRadius: "8px",
+                border: "none",
+                fontSize: "12px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                cursor: "pointer",
+                boxShadow: "0 4px 15px rgba(37, 99, 235, 0.25)"
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>person_add</span>
+              <span className="header-btn-text">Enroll Student</span>
+            </button>
+          </div>
         </header>
 
-        <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div className="dashboard-content" style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "1400px", margin: "0 auto" }}>
           {/* Stats Cards */}
-          <motion.div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <motion.div className="dashboard-stats-grid" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
               <div style={{ fontSize: "11px", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>TOTAL ENROLLED</div>
               <div style={{ fontSize: "36px", fontWeight: 900, color: "#0f172a", lineHeight: 1 }}>{students.length}</div>
@@ -225,7 +216,7 @@ export default function StudentManagementPage() {
 
           {/* Student Data Table Card */}
           <motion.div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <div style={{ overflowX: "auto" }}>
+            <div className="dashboard-table-container">
               <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", minWidth: "750px" }}>
                 <thead>
                   <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
@@ -302,7 +293,7 @@ export default function StudentManagementPage() {
       <AnimatePresence>
         {modalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}>
-            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "480px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
+            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} className="modal-responsive" style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "480px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
               <button onClick={() => setModalOpen(false)} style={{ position: "absolute", top: "20px", right: "20px", color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -323,7 +314,7 @@ export default function StudentManagementPage() {
                   <input type="text" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} style={{ width: "100%", backgroundColor: "#f8fafc", border: "1px solid #cbd5e1", color: "#0f172a", fontSize: "13px", padding: "10px 12px", borderRadius: "8px", outline: "none" }} placeholder="Set temporary password" />
                 </div>
                 <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", paddingTop: "12px", borderTop: "1px solid #e2e8f0" }}>
-                  <button type="button" onClick={() => setModalOpen(false)} style={{ backgroundColor: "transparent", border: "none", color: "#64748b", fontSize: "12px", fontWeight: 600, cursor: "pointer", padding: "8px 16px" }}>Cancel</button>
+                  <button type="button" onClick={() => setModalOpen(false)} style={{ backgroundColor: "transparent", border: "none", color: "#64748b", fontSize: "12px", fontWeight: 600, cursor: "padding", padding: "8px 16px" }}>Cancel</button>
                   <button type="submit" style={{ backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, border: "none", borderRadius: "8px", padding: "8px 20px", fontSize: "12px", cursor: "pointer" }}>
                     {editingId ? "Save Changes" : "Enroll Scholar"}
                   </button>
@@ -338,7 +329,7 @@ export default function StudentManagementPage() {
       <AnimatePresence>
         {progressModalOpen && selectedStudent && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}>
-            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "600px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
+            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} exit={{ scale: 0.95 }} className="modal-responsive" style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", width: "100%", maxWidth: "600px", padding: "28px", position: "relative", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
               <button onClick={() => setProgressModalOpen(false)} style={{ position: "absolute", top: "20px", right: "20px", color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
                 <span className="material-symbols-outlined">close</span>
               </button>

@@ -207,7 +207,8 @@ export default function DashboardSidebar({
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-[#e2e8f0] rounded-lg text-[#475569] shadow-md"
+        className="md:hidden fixed z-50 bg-white border border-[#e2e8f0] rounded-xl text-[#0f172a] shadow-sm flex items-center justify-center"
+        style={{ top: "14px", left: "14px", width: "38px", height: "38px", cursor: "pointer" }}
         aria-label="Open navigation"
       >
         <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>menu</span>
@@ -216,14 +217,27 @@ export default function DashboardSidebar({
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setMobileOpen(false)} className="md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm"
+              style={{ zIndex: 90 }}
+            />
             <motion.aside
-              initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="md:hidden fixed left-0 top-0 h-full z-50 overflow-hidden shadow-2xl"
-              style={{ width: "250px", background: "#ffffff", borderRight: "1px solid #e2e8f0" }}
+              className="md:hidden fixed left-0 top-0 h-full overflow-hidden shadow-2xl"
+              style={{ width: "260px", background: "#ffffff", borderRight: "1px solid #e2e8f0", zIndex: 100 }}
             >
-              <button onClick={() => setMobileOpen(false)} style={{ position: "absolute", top: "16px", right: "16px", color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
+              <button
+                onClick={() => setMobileOpen(false)}
+                style={{ position: "absolute", top: "16px", right: "16px", color: "#64748b", background: "none", border: "none", cursor: "pointer", zIndex: 10 }}
+                aria-label="Close menu"
+              >
                 <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>close</span>
               </button>
               <SidebarContent />
