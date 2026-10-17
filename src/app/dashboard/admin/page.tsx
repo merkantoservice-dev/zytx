@@ -393,139 +393,120 @@ export default function AdminHubPage() {
         </header>
 
         <div className="p-3.5 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-7 max-w-[1400px] mx-auto">
-          {/* Top Stat Cards — Mobile 2-Column Grid */}
+          {/* Top 4 Stat Cards — Exact Symmetrical Design from Reference */}
           <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
               {/* Card 1: Active Modules */}
-              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">inventory_2</span>
+                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">inventory_2</span>
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">ACTIVE MODULES</span>
                   </div>
+                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{totalCourses}</div>
-                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
-                    <span className="truncate">active modules</span>
-                    <div className="hidden sm:block w-8 h-1 bg-[#e2e8f0] rounded" />
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{totalCourses}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                    <span>active modules</span>
+                    <div className="w-12 h-1 bg-[#e2e8f0] rounded-full overflow-hidden">
+                      <div className="w-3/5 h-full bg-[#2563eb] rounded-full" />
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Card 2: Registered Students */}
-              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">group</span>
+                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">group</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">STUDENTS</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">REGISTERED STUDENTS</span>
                   </div>
+                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{enrolledStudents}</div>
-                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
-                    <span className="truncate">registered scholars</span>
-                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
-                      <path d="M2 14 Q 12 16, 22 8 T 43 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{enrolledStudents}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                    <span>registered students</span>
+                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
+                      <path d="M2 14 Q 13 16, 23 8 T 44 3" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 3: Lessons Watched */}
-              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">play_circle</span>
+                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">play_circle</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">WATCHED</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">LESSONS WATCHED</span>
                   </div>
+                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{totalWatchedVideos}</div>
-                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
-                    <span className="truncate">completions</span>
-                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
-                      <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.4" />
-                      <rect x="9" y="6" width="4" height="12" rx="1" fill="#2563eb" opacity="0.6" />
-                      <rect x="16" y="12" width="4" height="6" rx="1" fill="#2563eb" opacity="0.5" />
-                      <rect x="23" y="4" width="4" height="14" rx="1" fill="#2563eb" opacity="0.8" />
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{totalWatchedVideos}</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                    <span>video completions</span>
+                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
+                      <rect x="2" y="10" width="4" height="8" rx="1" fill="#2563eb" opacity="0.35" />
+                      <rect x="9" y="6" width="4" height="12" rx="1" fill="#2563eb" opacity="0.55" />
+                      <rect x="16" y="12" width="4" height="6" rx="1" fill="#2563eb" opacity="0.45" />
+                      <rect x="23" y="4" width="4" height="14" rx="1" fill="#2563eb" opacity="0.75" />
                       <rect x="30" y="2" width="4" height="16" fill="#2563eb" />
+                      <rect x="37" y="8" width="4" height="10" rx="1" fill="#2563eb" opacity="0.65" />
                     </svg>
                   </div>
                 </div>
               </div>
 
               {/* Card 4: Average Progress */}
-              <div className="bg-white border border-[#e2e8f0] rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs">
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-blue-300 transition-all min-h-[140px] sm:min-h-[155px]">
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">trending_up</span>
+                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-[#2563eb] text-base sm:text-lg">trending_up</span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">PROGRESS</span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">AVERAGE PROGRESS</span>
                   </div>
+                  <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer shrink-0">more_horiz</span>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-1">{avgProgress}%</div>
-                  <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-[#64748b] mt-1.5 sm:mt-2">
-                    <span className="truncate">avg scholar</span>
-                    <svg className="hidden sm:block" width="36" height="14" viewBox="0 0 45 18" fill="none">
-                      <path d="M2 15 C 15 15, 25 8, 43 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] leading-none my-2 sm:my-3 tracking-tight">{avgProgress}%</div>
+                  <div className="flex items-center justify-between text-[11px] text-[#64748b]">
+                    <span>per scholar avg</span>
+                    <svg width="46" height="18" viewBox="0 0 46 18" fill="none">
+                      <path d="M2 15 C 16 15, 26 8, 44 4" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                     </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 5: Demo Access Inquiries (Spans full width on mobile, 1 col on desktop) */}
-              <div
-                onClick={() => router.push("/dashboard/admin/demo-requests")}
-                className="col-span-2 lg:col-span-1 bg-white border border-[#e2e8f0] hover:border-blue-400 rounded-xl sm:rounded-2xl p-3 sm:p-5 flex flex-col justify-between shadow-xs cursor-pointer transition-all"
-              >
-                <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#eff6ff] border border-[#bfdbfe] flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-[#2563eb] text-sm sm:text-base">play_circle</span>
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-bold text-[#64748b] tracking-wider uppercase truncate">DEMO INQUIRIES</span>
-                  </div>
-                  {pendingDemoCount > 0 && (
-                    <span className="bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe] text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0">
-                      {pendingDemoCount} PENDING
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center justify-between lg:block">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-none mb-0 lg:mb-1">{demoRequests.length}</div>
-                  <div className="text-[11px] text-[#2563eb] font-semibold flex items-center gap-1">
-                    <span>Manage Demo Access →</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Pending Demo Requests Quick Alert Banner */}
+            {/* Pending Demo Requests Notification Banner */}
             {pendingDemoCount > 0 && (
-              <div style={{ marginTop: "16px", backgroundColor: "#fffbeb", border: "1px solid #fde68a", borderRadius: "12px", padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span className="material-symbols-outlined" style={{ color: "#d97706", fontSize: "22px" }}>warning</span>
+              <div className="mt-4 bg-amber-50 border border-amber-200/80 rounded-xl px-4 py-3 flex items-center justify-between shadow-xs">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-amber-600 text-xl">notifications_active</span>
                   <div>
-                    <span style={{ fontSize: "13px", fontWeight: 700, color: "#92400e" }}>
+                    <span className="text-xs sm:text-sm font-bold text-amber-900">
                       {pendingDemoCount} Candidate{pendingDemoCount > 1 ? "s" : ""} awaiting demo course access approval
                     </span>
-                    <div style={{ fontSize: "11px", color: "#b45309" }}>Review submissions to grant video playback access immediately.</div>
+                    <div className="text-[11px] text-amber-700">Review submissions in Demo Requests to grant video playback access immediately.</div>
                   </div>
                 </div>
                 <button
                   onClick={() => router.push("/dashboard/admin/demo-requests")}
-                  style={{ backgroundColor: "#d97706", color: "#ffffff", border: "none", borderRadius: "8px", padding: "8px 16px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
+                  className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-colors shrink-0"
                 >
-                  Review Inquiries →
+                  Review →
                 </button>
               </div>
             )}
@@ -676,32 +657,32 @@ export default function AdminHubPage() {
             </div>
           </motion.section>
 
-          {/* Bottom Split Row: Student Registry & Admin Registry */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
+          {/* Bottom Split Row: Student Registry & Admin Registry — Exact Reference Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
             {/* Left: Student Registry & Status */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}>
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-                    <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                       STUDENT REGISTRY & STATUS
                     </h2>
                     <button
                       onClick={() => router.push("/dashboard/admin/students")}
-                      style={{ backgroundColor: "transparent", border: "none", color: "#2563eb", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px", cursor: "pointer" }}
+                      className="bg-transparent border-0 text-[#2563eb] text-xs font-semibold flex items-center gap-1 hover:underline cursor-pointer p-0"
                     >
-                      Go to Student Registry <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_forward</span>
+                      Go to Student Registry <span className="material-symbols-outlined text-base">arrow_forward</span>
                     </button>
                   </div>
 
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+                  <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                    <table className="w-full border-collapse text-left min-w-[440px] sm:min-w-full">
                       <thead>
-                        <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>STUDENT</th>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>LESSONS MATCHED</th>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>PROGRESS</th>
-                          <th style={{ paddingBottom: "12px" }}></th>
+                        <tr className="border-b border-[#e2e8f0]">
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">STUDENT</th>
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">LESSONS MATCHED</th>
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">PROGRESS</th>
+                          <th className="pb-3 w-6"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -715,31 +696,31 @@ export default function AdminHubPage() {
                           const initial = student.name ? student.name.charAt(0).toUpperCase() : "S";
 
                           return (
-                            <tr key={student.id} style={{ borderBottom: "1px solid #e2e8f0" }}>
-                              <td style={{ padding: "14px 12px 14px 0" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                                  <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, fontSize: "13px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                            <tr key={student.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-slate-50/50 transition-colors">
+                              <td className="py-3 sm:py-3.5 pr-3">
+                                <div className="flex items-center gap-2.5 sm:gap-3">
+                                  <div className="w-8 h-8 rounded-full bg-[#2563eb] text-white font-bold text-xs flex items-center justify-center shrink-0">
                                     {initial}
                                   </div>
-                                  <div>
-                                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>{student.name}</div>
-                                    <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>{student.email}</div>
+                                  <div className="min-w-0">
+                                    <div className="text-xs sm:text-sm font-bold text-[#0f172a] truncate">{student.name}</div>
+                                    <div className="text-[11px] text-[#64748b] truncate">{student.email}</div>
                                   </div>
                                 </div>
                               </td>
-                              <td style={{ padding: "14px 12px", fontSize: "12px", color: "#475569", whiteSpace: "nowrap" }}>
+                              <td className="py-3 sm:py-3.5 px-3 text-xs text-[#475569] whitespace-nowrap">
                                 {watchedSessions} Lessons Matched
                               </td>
-                              <td style={{ padding: "14px 12px" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                  <div style={{ width: "100px", height: "6px", backgroundColor: "#e2e8f0", borderRadius: "9999px", overflow: "hidden" }}>
-                                    <div style={{ width: `${dynamicProgress}%`, height: "100%", backgroundColor: "#2563eb", borderRadius: "9999px" }} />
+                              <td className="py-3 sm:py-3.5 px-3">
+                                <div className="flex items-center gap-2.5">
+                                  <div className="w-20 sm:w-28 h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden shrink-0">
+                                    <div style={{ width: `${dynamicProgress}%` }} className="h-full bg-[#2563eb] rounded-full" />
                                   </div>
-                                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#0f172a" }}>{dynamicProgress}%</span>
+                                  <span className="text-xs font-bold text-[#0f172a] min-w-[28px]">{dynamicProgress}%</span>
                                 </div>
                               </td>
-                              <td style={{ padding: "14px 0 14px 12px", textAlign: "right" }}>
-                                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: "#94a3b8", cursor: "pointer" }}>more_vert</span>
+                              <td className="py-3 sm:py-3.5 pl-2 text-right">
+                                <span className="material-symbols-outlined text-[#94a3b8] hover:text-[#475569] text-lg cursor-pointer">more_vert</span>
                               </td>
                             </tr>
                           );
@@ -753,62 +734,62 @@ export default function AdminHubPage() {
 
             {/* Right: Administrators Registry */}
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.22 }}>
-              <div style={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px", padding: "24px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+              <div className="bg-white border border-[#e2e8f0] rounded-2xl p-4 sm:p-6 h-full flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-                    <h2 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", letterSpacing: "0.05em", textTransform: "uppercase", margin: 0 }}>
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <h2 className="text-xs sm:text-sm font-bold text-[#0f172a] uppercase tracking-wider m-0">
                       ADMINISTRATORS REGISTRY
                     </h2>
                     <button
                       onClick={() => setIsAdminModalOpen(true)}
-                      style={{ backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, padding: "8px 16px", borderRadius: "8px", border: "none", fontSize: "12px", display: "inline-flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
+                      className="bg-[#2563eb] hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-colors cursor-pointer border-0"
                     >
-                      <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>add</span>
+                      <span className="material-symbols-outlined text-base">add</span>
                       Add Admin
                     </button>
                   </div>
 
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+                  <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                    <table className="w-full border-collapse text-left min-w-[380px] sm:min-w-full">
                       <thead>
-                        <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>ADMINISTRATOR</th>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px" }}>ROLE</th>
-                          <th style={{ color: "#64748b", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", paddingBottom: "12px", textAlign: "right" }}>ACTIONS</th>
+                        <tr className="border-b border-[#e2e8f0]">
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">ADMINISTRATOR</th>
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3">ROLE</th>
+                          <th className="text-[#64748b] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider pb-3 text-right">ACTIONS</th>
                         </tr>
                       </thead>
                       <tbody>
                         {adminsLoaded && admins.map((admin) => {
                           const initial = admin.name ? admin.name.charAt(0).toUpperCase() : "A";
                           return (
-                            <tr key={admin.id} style={{ borderBottom: "1px solid #e2e8f0" }}>
-                              <td style={{ padding: "14px 12px 14px 0" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                                  <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#2563eb", color: "#ffffff", fontWeight: 700, fontSize: "13px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                            <tr key={admin.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-slate-50/50 transition-colors">
+                              <td className="py-3 sm:py-3.5 pr-3">
+                                <div className="flex items-center gap-2.5 sm:gap-3">
+                                  <div className="w-8 h-8 rounded-full bg-[#2563eb] text-white font-bold text-xs flex items-center justify-center shrink-0">
                                     {initial}
                                   </div>
-                                  <div>
-                                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#0f172a" }}>{admin.name}</div>
-                                    <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>{admin.email}</div>
+                                  <div className="min-w-0">
+                                    <div className="text-xs sm:text-sm font-bold text-[#0f172a] truncate">{admin.name}</div>
+                                    <div className="text-[11px] text-[#64748b] truncate">{admin.email}</div>
                                   </div>
                                 </div>
                               </td>
-                              <td style={{ padding: "14px 12px" }}>
-                                <span style={{ backgroundColor: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", borderRadius: "9999px", padding: "4px 12px", fontSize: "11px", fontWeight: 600, display: "inline-block" }}>
+                              <td className="py-3 sm:py-3.5 px-3">
+                                <span className="bg-[#eff6ff] text-[#2563eb] border border-[#bfdbfe] rounded-full px-2.5 py-0.5 text-[11px] font-semibold inline-block whitespace-nowrap">
                                   Administrator
                                 </span>
                               </td>
-                              <td style={{ padding: "14px 0 14px 12px", textAlign: "right" }}>
+                              <td className="py-3 sm:py-3.5 pl-3 text-right">
                                 {admin.id !== "a1" ? (
                                   <button
                                     onClick={() => { if (confirm(`Revoke admin privileges for ${admin.name}?`)) deleteAdmin(admin.id); }}
-                                    style={{ backgroundColor: "#fef2f2", color: "#dc2626", border: "1px solid #fca5a5", borderRadius: "8px", padding: "6px 12px", fontSize: "12px", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "4px", cursor: "pointer" }}
+                                    className="border border-red-300 text-red-600 hover:bg-red-50 bg-white rounded-lg px-2.5 py-1 text-xs font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
                                   >
-                                    <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>delete</span>
+                                    <span className="material-symbols-outlined text-sm">delete</span>
                                     Revoke
                                   </button>
                                 ) : (
-                                  <span style={{ fontSize: "12px", color: "#94a3b8" }}>Primary</span>
+                                  <span className="text-xs text-[#94a3b8] font-medium">Primary</span>
                                 )}
                               </td>
                             </tr>
@@ -819,7 +800,7 @@ export default function AdminHubPage() {
                   </div>
                 </div>
 
-                <div style={{ fontSize: "12px", color: "#64748b", paddingTop: "16px", borderTop: "1px solid #e2e8f0", marginTop: "16px" }}>
+                <div className="text-xs text-[#64748b] pt-3.5 border-t border-[#e2e8f0] mt-3">
                   Active system administrators: {admins.length}
                 </div>
               </div>
