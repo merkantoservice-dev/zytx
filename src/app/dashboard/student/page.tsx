@@ -597,7 +597,7 @@ export default function StudentDashboardPage() {
           </div>
 
           {/* Tabs */}
-          <div style={{ display: "flex", gap: "0px", borderTop: "1px solid #f1f5f9", overflowX: "auto" }}>
+          <div className="student-tabs-container">
             {["My Learning", "Course Library"].map((tab, i) => (
               <button key={tab} onClick={() => setActiveTab(i)} style={{
                 padding: "14px 20px", fontSize: "13px",
@@ -678,17 +678,13 @@ export default function StudentDashboardPage() {
                     </div>
                     {/* Course Thumbnail */}
                     {lastWatchedCourse?.img && (
-                      <div style={{
-                        width: "160px", height: "130px", borderRadius: "12px", overflow: "hidden", flexShrink: 0,
-                        backgroundColor: "#e2e8f0"
-                      }}>
+                      <div className="student-resume-thumb">
                         <img src={lastWatchedCourse.img} alt={lastWatchedCourse.title}
                           style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                     )}
                     {!lastWatchedCourse?.img && (
-                      <div style={{
-                        width: "160px", height: "130px", borderRadius: "12px", overflow: "hidden", flexShrink: 0,
+                      <div className="student-resume-thumb" style={{
                         background: "linear-gradient(135deg, #1e3a5f 0%, #2563eb 60%, #0ea5e9 100%)",
                         display: "flex", alignItems: "center", justifyContent: "center"
                       }}>
@@ -797,10 +793,7 @@ export default function StudentDashboardPage() {
                     {studentAssignments.map((assign) => {
                       const studentSubmission = assign.submissions?.find(sub => sub.studentId === currentStudent.id);
                       return (
-                        <div key={assign.id} style={{
-                          padding: "16px 20px", backgroundColor: "#f8fafc", border: "1px solid #e2e8f0",
-                          borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px"
-                        }}>
+                        <div key={assign.id} className="student-deliverable-item">
                           <div style={{ flex: 1 }}>
                             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
                               <span style={{ fontSize: "11px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase" }}>Due: {assign.dueDate}</span>
@@ -847,7 +840,7 @@ export default function StudentDashboardPage() {
                 </div>
               )}
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "20px" }}>
+              <div className="student-course-grid">
                 {coursesLoaded && filteredCourses.map((course) => {
                   const { total, watched } = getCourseProg(course);
                   return (
@@ -948,6 +941,7 @@ export default function StudentDashboardPage() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             style={{ position: "fixed", inset: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", backgroundColor: "rgba(15,23,42,0.55)", backdropFilter: "blur(4px)" }}>
             <motion.div initial={{ scale: 0.96, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.96, y: 20 }}
+              className="modal-responsive"
               style={{ backgroundColor: "#ffffff", borderRadius: "20px", width: "100%", maxWidth: "560px", padding: "32px", boxShadow: "0 24px 48px rgba(0,0,0,0.18)", position: "relative" }}>
               <div style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.12em" }}>Important Notice</div>
               <h2 style={{ fontSize: "20px", fontWeight: 900, color: "#0f172a", margin: "6px 0 16px", textTransform: "uppercase" }}>Educational Disclaimer</h2>
@@ -1142,18 +1136,18 @@ export default function StudentDashboardPage() {
                 </div>
 
                 {/* Course info strip */}
-                <div style={{ padding: "14px 20px", borderBottom: "1px solid #e2e8f0", backgroundColor: "#ffffff", display: "flex", alignItems: "center", gap: "14px" }}>
+                <div className="student-video-strip">
                   {lastWatchedCourse?.img && (
-                    <div style={{ width: "48px", height: "48px", borderRadius: "8px", overflow: "hidden", flexShrink: 0, backgroundColor: "#e2e8f0" }}>
+                    <div style={{ width: "42px", height: "42px", borderRadius: "8px", overflow: "hidden", flexShrink: 0, backgroundColor: "#e2e8f0" }}>
                       <img src={lastWatchedCourse.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                   )}
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.1em" }}>COURSE MODULE</div>
-                    <div style={{ fontSize: "15px", fontWeight: 800, color: "#0f172a", marginTop: "2px" }}>{lastWatchedCourse?.title || "Course"}</div>
-                    <div style={{ fontSize: "11px", color: "#94a3b8" }}>{lastWatchedCourse?.description?.slice(0, 80)}...</div>
+                    <div style={{ fontSize: "14px", fontWeight: 800, color: "#0f172a", marginTop: "2px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{lastWatchedCourse?.title || "Course"}</div>
+                    <div style={{ fontSize: "11px", color: "#94a3b8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{lastWatchedCourse?.description?.slice(0, 80)}...</div>
                   </div>
-                  <div style={{ textAlign: "right" }}>
+                  <div className="student-video-strip-progress" style={{ textAlign: "right" }}>
                     <div style={{ fontSize: "11px", color: "#94a3b8" }}>Course Progress</div>
                     <div style={{ width: "120px", height: "5px", backgroundColor: "#e2e8f0", borderRadius: "9999px", overflow: "hidden", marginTop: "6px" }}>
                       <div style={{ width: `${dynamicCompletion}%`, height: "100%", backgroundColor: "#2563eb", borderRadius: "9999px" }} />
@@ -1161,20 +1155,20 @@ export default function StudentDashboardPage() {
                     <div style={{ fontSize: "10px", color: "#94a3b8", marginTop: "4px" }}>{watchedSessionsCount}/{totalSessionsCount} lessons</div>
                   </div>
                   <button onClick={() => { setPlayingUrl(null); setActiveSession(null); }}
-                    style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b", cursor: "pointer" }}>
+                    style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", color: "#64748b", cursor: "pointer", flexShrink: 0 }}>
                     <span className="material-symbols-outlined" style={{ fontSize: "17px" }}>close</span>
                   </button>
                 </div>
 
                 {/* Active session label */}
-                <div style={{ padding: "10px 20px", backgroundColor: "#f8fafc", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{ padding: "8px 16px", backgroundColor: "#f8fafc", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}>
                   <span style={{ width: "8px", height: "8px", backgroundColor: "#22c55e", borderRadius: "50%", flexShrink: 0 }} />
-                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#22c55e", letterSpacing: "0.08em" }}>Active Session</span>
-                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#64748b" }}>{activeSession.title}</span>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#22c55e", letterSpacing: "0.08em", whiteSpace: "nowrap" }}>Active Session</span>
+                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#64748b", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{activeSession.title}</span>
                 </div>
 
                 {/* Video embed */}
-                <div style={{ flex: 1, position: "relative", backgroundColor: "#000" }}>
+                <div className="student-video-frame-container">
                   <iframe
                     src={`${playingUrl}?autoplay=1`}
                     style={{ width: "100%", height: "100%", position: "absolute", inset: 0, border: "none" }}
@@ -1185,7 +1179,7 @@ export default function StudentDashboardPage() {
 
                 {/* Lesson tabs below video */}
                 <div style={{ borderTop: "1px solid #e2e8f0", backgroundColor: "#ffffff" }}>
-                  <div style={{ display: "flex", padding: "0 16px", gap: "4px" }}>
+                  <div style={{ display: "flex", padding: "0 16px", gap: "4px", overflowX: "auto", whiteSpace: "nowrap" }}>
                     {["Lesson List", "Overview", "Resources", "Discussion"].map((t, ti) => (
                       <button key={t} style={{
                         padding: "12px 16px", fontSize: "12px", fontWeight: ti === 0 ? 700 : 500,

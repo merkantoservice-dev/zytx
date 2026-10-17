@@ -232,4 +232,106 @@
   }
 }
 
+/* Student Portal Specific Utilities */
+.student-tabs-container {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid #f1f5f9;
+  overflow-x: auto;
+  padding-left: 32px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.student-resume-thumb {
+  width: 160px;
+  height: 130px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #e2e8f0;
+}
+
+.student-deliverable-item {
+  padding: 16px 20px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.student-video-frame-container {
+  flex: 1;
+  position: relative;
+  background-color: #000;
+  min-height: 220px;
+}
+
+.student-video-strip {
+  padding: 14px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .student-tabs-container {
+    padding-left: 14px !important;
+  }
+
+  .student-course-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .student-video-frame-container {
+    flex: none !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    height: auto !important;
+  }
+
+  .student-video-strip {
+    padding: 10px 14px !important;
+    gap: 10px !important;
+  }
+
+  .student-video-strip-progress {
+    display: none !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .student-resume-thumb {
+    width: 100% !important;
+    height: 180px !important;
+    order: -1 !important;
+  }
+
+  .student-deliverable-item {
+    padding: 14px 16px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .student-deliverable-item button {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+
 
