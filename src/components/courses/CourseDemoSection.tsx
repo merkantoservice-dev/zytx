@@ -57,7 +57,7 @@ export default function CourseDemoSection() {
   const [demoConfig, setDemoConfig] = useState<DemoConfig>({
     v1: { title: "DEMO VIDEO 1: MASTERCLASS OVERVIEW", url: "https://player.vimeo.com/video/1236241664" },
     v2: { title: "DEMO VIDEO 2: BASICS OF EXPORTING", url: "https://player.vimeo.com/video/1236241664" },
-    whatsapp: "+91 98765 43210"
+    whatsapp: "+91 9400308350"
   });
   const [activeVidIdx, setActiveVidIdx] = useState<0 | 1>(0);
 
@@ -316,7 +316,7 @@ export default function CourseDemoSection() {
   };
 
   const cleanWhatsappNumber = (demoConfig.whatsapp || "").replace(/[^0-9]/g, "");
-  const whatsappUrl = `https://wa.me/${cleanWhatsappNumber || "919876543210"}?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${cleanWhatsappNumber || "919400308350"}?text=${encodeURIComponent(
     `Hi, I have requested access for the ZYTX Course Demo with email: ${currentUser?.email || "my email"}. Could you please grant access?`
   )}`;
 

@@ -27,7 +27,7 @@ const DEFAULT_DEMO_CONFIG: DemoConfig = {
     title: "DEMO VIDEO 2: BASICS OF EXPORTING",
     url: "https://player.vimeo.com/video/1236241664"
   },
-  whatsapp: "+91 98765 43210"
+  whatsapp: "+91 9400308350"
 };
 
 export function useDemo() {

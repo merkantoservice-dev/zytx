@@ -149,7 +149,7 @@ export default function DashboardSidebar({
           Main Website
         </button>
         <button
-          onClick={() => window.open("mailto:contact@zytx.com", "_blank")}
+          onClick={() => window.open("mailto:support@zytxventures.com", "_blank")}
           style={{
             display: "flex",
             alignItems: "center",

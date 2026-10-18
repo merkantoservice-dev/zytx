@@ -37,7 +37,7 @@ export default function ContactPage() {
                 </div>
                 <div className={styles.formGroup}>
                   <label>Phone</label>
-                  <input type="tel" className={styles.formInput} placeholder="+1 (555) 000-0000" />
+                  <input type="tel" className={styles.formInput} placeholder="+91 94000 00000" />
                 </div>
               </div>
               <div className={styles.formGroup}>
@@ -80,16 +80,16 @@ export default function ContactPage() {
 
           <div className={styles.contactDetails}>
             <div className={styles.detailBlock}>
-              <h4>Business Enquiries</h4>
-              <a href="mailto:contact@zytx.com">contact@zytx.com</a>
+              <h4>Business & Support</h4>
+              <a href="mailto:support@zytxventures.com">support@zytxventures.com</a>
             </div>
             <div className={styles.detailBlock}>
               <h4>Call</h4>
-              <a href="tel:+1234567890">+1 (234) 567-890</a>
+              <a href="tel:+919400308350">+91 9400308350</a>
             </div>
             <div className={styles.detailBlock}>
               <h4>Visit</h4>
-              <p>100 Strategic Growth Ave.<br/>Suite 400<br/>New York, NY 10001</p>
+              <p>HiLITE Business Park<br/>Palazhi, Kozhikode<br/>673014</p>
             </div>
             <div className={styles.detailBlock}>
               <h4>Follow</h4>

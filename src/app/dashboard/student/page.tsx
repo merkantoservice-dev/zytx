@@ -178,7 +178,7 @@ function StudentSidebar({
           Main Website
         </button>
 
-        <button onClick={() => window.open("mailto:support@zytx.com", "_blank")} style={{
+        <button onClick={() => window.open("mailto:support@zytxventures.com", "_blank")} style={{
           display: "flex", alignItems: "center", gap: "10px", color: "#64748b", padding: "9px 14px",
           borderRadius: "8px", fontSize: "13px", fontWeight: 500, width: "100%", background: "none",
           border: "none", cursor: "pointer", fontFamily: "Outfit, sans-serif"

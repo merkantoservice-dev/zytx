@@ -26,7 +26,7 @@ export default function AdminDemoRequestsPage() {
   const [v1Url, setV1Url] = useState("https://player.vimeo.com/video/1236241664");
   const [v2Title, setV2Title] = useState("DEMO VIDEO 2: BASICS OF EXPORTING");
   const [v2Url, setV2Url] = useState("https://player.vimeo.com/video/1236241664");
-  const [whatsappNumber, setWhatsappNumber] = useState("+91 98765 43210");
+  const [whatsappNumber, setWhatsappNumber] = useState("+91 9400308350");
 
   const [filterStatus, setFilterStatus] = useState<"all" | "pending" | "approved" | "rejected" | "paused">("all");
   const [searchQuery, setSearchQuery] = useState("");

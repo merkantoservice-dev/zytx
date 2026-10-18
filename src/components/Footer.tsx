@@ -50,6 +50,11 @@ export default function Footer() {
               Contact
               <ArrowIcon />
             </Link>
+            <a href="mailto:support@zytxventures.com">support@zytxventures.com</a>
+            <a href="tel:+919400308350">+91 9400308350</a>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4, margin: '2px 0' }}>
+              HiLITE Business Park, Palazhi, Kozhikode 673014
+            </p>
             <Link href="#linkedin">LinkedIn</Link>
             <div className={styles.divider}></div>
           </div>
