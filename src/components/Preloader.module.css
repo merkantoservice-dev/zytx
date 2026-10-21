@@ -1,0 +1,120 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #070b14;
+  background-image: 
+    radial-gradient(circle at 50% 45%, rgba(37, 99, 235, 0.15) 0%, rgba(7, 11, 20, 0.95) 60%, #070b14 100%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.015) 0, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+  user-select: none;
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: contentIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoGlow {
+  position: absolute;
+  width: 140px;
+  height: 60px;
+  background: #2563eb;
+  filter: blur(40px);
+  opacity: 0.35;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+.tagline {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-top: -0.25rem;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 180px;
+  margin-top: 0.5rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 50%, #60a5fa 100%);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.7);
+  border-radius: 99px;
+  transition: width 0.04s linear;
+}
+
+.percentage {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #60a5fa;
+  letter-spacing: 0.12em;
+}
+
+@keyframes contentIntro {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.45;
+  }
+}
