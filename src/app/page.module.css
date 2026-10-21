@@ -345,6 +345,10 @@
   color: white;
 }
 
+.services h2 {
+  color: #ffffff;
+}
+
 .servicesList {
   display: flex;
   flex-direction: column;

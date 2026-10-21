@@ -107,7 +107,7 @@ export default function Home() {
             <div className={styles.line}></div>
             <span className={`${styles.sectionNumber} ${styles.sectionNumberDark}`}>02</span>
           </div>
-          <h2 className={styles.responsiveHeadingLg} style={{ marginBottom: '3.5rem' }}>Built to move businesses forward.</h2>
+          <h2 className={styles.responsiveHeadingLg} style={{ color: '#ffffff', marginBottom: '3.5rem' }}>Built to move businesses forward.</h2>
           
           <div className={styles.servicesList}>
             <div className={styles.serviceItem}>
