@@ -619,7 +619,7 @@ export default function AdminHubPage() {
                   {displayedCourses.map((mod) => (
                     <div key={mod.id} style={{ backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                       <div>
-                        <div style={{ height: "140px", borderRadius: "10px", overflow: "hidden", marginBottom: "12px", backgroundColor: "#e2e8f0" }}>
+                        <div style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "10px", overflow: "hidden", marginBottom: "12px", backgroundColor: "#e2e8f0" }}>
                           <img src={mod.img || "/images/brochure_page24_img1.jpeg"} alt={mod.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
                         <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a", margin: 0 }}>{mod.title}</h4>
@@ -884,9 +884,14 @@ export default function AdminHubPage() {
                 </div>
 
                 <div style={{ padding: "16px", backgroundColor: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                  <label style={{ fontSize: "11px", fontWeight: 700, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.05em" }}>Course Cover Image</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "6px" }}>
+                    <label style={{ fontSize: "11px", fontWeight: 700, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.05em" }}>Course Cover Image</label>
+                    <span style={{ fontSize: "10px", fontWeight: 700, color: "#2563eb", backgroundColor: "#eff6ff", border: "1px solid #bfdbfe", padding: "2px 8px", borderRadius: "4px", fontFamily: "Geist Mono, monospace" }}>
+                      PROPORTION: 16:9 (1280 × 720 px)
+                    </span>
+                  </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "14px", flexWrap: "wrap" }}>
-                    <div style={{ width: "80px", height: "55px", backgroundColor: "#e2e8f0", border: "1px solid #cbd5e1", borderRadius: "8px", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "100px", aspectRatio: "16 / 9", backgroundColor: "#e2e8f0", border: "1px solid #cbd5e1", borderRadius: "8px", overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {formData.img ? <img src={formData.img} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span className="material-symbols-outlined" style={{ color: "#64748b" }}>image</span>}
                     </div>
                     <div style={{ flex: 1, minWidth: "180px", display: "flex", flexDirection: "column", gap: "8px" }}>

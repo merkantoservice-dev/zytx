@@ -850,8 +850,8 @@ export default function StudentDashboardPage() {
                       onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 8px 28px rgba(0,0,0,0.1)")}
                       onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.04)")}
                     >
-                      {/* Image */}
-                      <div style={{ height: "180px", position: "relative", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
+                      {/* Image (16:9 Standard Ratio) */}
+                      <div style={{ width: "100%", aspectRatio: "16 / 9", position: "relative", overflow: "hidden", backgroundColor: "#e2e8f0" }}>
                         <img
                           src={course.img || "/images/brochure_page24_img1.jpeg"}
                           alt={course.title}
@@ -977,12 +977,14 @@ export default function StudentDashboardPage() {
                     {selectedCourseDetail.description || "Explore all the video lessons inside this course module."}
                   </p>
                 </div>
-                <div style={{ flex: 1, overflow: "hidden", minHeight: "200px", position: "relative", margin: "0 0 0 0" }}>
-                  <img
-                    src={selectedCourseDetail.img || "/images/brochure_page24_img1.jpeg"}
-                    alt={selectedCourseDetail.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
+                <div style={{ padding: "0 24px 20px" }}>
+                  <div style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "10px", overflow: "hidden", backgroundColor: "#e2e8f0", position: "relative" }}>
+                    <img
+                      src={selectedCourseDetail.img || "/images/brochure_page24_img1.jpeg"}
+                      alt={selectedCourseDetail.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
                 </div>
               </div>
 
